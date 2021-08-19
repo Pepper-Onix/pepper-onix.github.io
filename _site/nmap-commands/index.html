@@ -9,23 +9,29 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Posts by Year - PepperOnion’s Blog</title>
-<meta name="description" content="PepperOnion’s personal blog. Security and Linux stuff.">
+<!-- begin _includes/seo.html --><title>Nmap cheatsheet - PepperOnion’s Blog</title>
+<meta name="description" content="nmap -n -Pn -sT -p- –min-rate 3500 IP –open">
 
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="PepperOnion's Blog">
-<meta property="og:title" content="Posts by Year">
-<meta property="og:url" content="http://localhost:4000/year-archive/">
+<meta property="og:title" content="Nmap cheatsheet">
+<meta property="og:url" content="http://localhost:4000/nmap-commands/">
+
+
+  <meta property="og:description" content="nmap -n -Pn -sT -p- –min-rate 3500 IP –open">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png">
 
 
 
 
 
-
-
+  <meta property="article:published_time" content="2021-08-19T00:00:00+02:00">
 
 
 
@@ -36,7 +42,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/year-archive/">
+<link rel="canonical" href="http://localhost:4000/nmap-commands/">
 
 
 
@@ -100,7 +106,7 @@
 
   </head>
 
-  <body class="layout--posts">
+  <body class="layout--single wide">
 
     <!--[if lt IE 9]>
 <div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
@@ -160,7 +166,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Posts by Year</li>
+        <li class="current">Nmap cheatsheet</li>
       
     
   </ol>
@@ -287,177 +293,90 @@
   </div>
 
 
-  <div class="archive">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Nmap cheatsheet">
+    <meta itemprop="description" content="nmap -n -Pn -sT -p- –min-rate 3500 IP –open">
+    <meta itemprop="datePublished" content="August 19, 2021">
     
-      <h1 id="page-title" class="page__title">Posts by Year</h1>
-    
-    
 
-
-<ul class="taxonomy__index">
-  
-  
-    <li>
-      <a href="#2021">
-        <strong>2021</strong> <span class="taxonomy__count">4</span>
-      </a>
-    </li>
-  
-</ul>
-
-
-
-  <section id="2021" class="taxonomy__section">
-    <h2 class="archive__subtitle">2021</h2>
-    <div class="entries-list">
+    <div class="page__inner-wrap">
       
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Nmap cheatsheet
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p class="page__meta">
+          
+            <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-08-19T00:00:00+02:00">August 19, 2021 </time>&emsp;
+          
+          
+        </p>
+        <h2 id="scan-techniques">Scan techniques</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	-sS	nmap 192.168.1.1 -sS	 	TCP SYN port scan (Default)
+-sT 		nmap 192.168.1.1 -sT 		TCP connect port scan (Default without root privilege)**
+	-sU	nmap 192.168.1.1 -sU	 	UDP port scan
+	-sA 	nmap 192.168.1.1 -sA 		TCP ACK port scan
+	-sW 	nmap 192.168.1.1 -sW 		TCP Window port scan
+	-sM 	nmap 192.168.1.1 -sM 		TCP Maimon port scan
+
+</code></pre></div></div>
+<h2 id="host-discovery">Host discovery</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	-sL 	nmap 192.168.1.1-3 -sL 		No Scan. List targets only
+	-sn 	nmap 192.168.1.1/24 -sn 	Disable port scanning
+-Pn 		nmap 192.168.1.1-5 -Pn 		Disable host discovery. Port scan only
+	-PR 	nmap 192.168.1.1-1/24 -PR 	ARP discovery on local network
+-n 		nmap 192.168.1.1 -n 		Never do DNS resolution
+
+</code></pre></div></div>
+
+<h2 id="service-and-version-detection">Service and version detection</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-sV 					nmap 192.168.1.1 -sV 					Attempts to determine the version of the service running on port
+	-sV --version-intensity 	nmap 192.168.1.1 -sV --version-intensity 8 		Intensity level 0 to 9. Higher number increases possibility of correctness
+	-sV --version-light 		nmap 192.168.1.1 -sV --version-light 			Enable light mode. Lower possibility of correctness. Faster
+	-sV --version-all 		nmap 192.168.1.1 -sV --version-all 			Enable intensity level 9. Higher possibility of correctness. Slower
+-A 					nmap 192.168.1.1 -A 					Enables OS detection, version detection, script scanning, and traceroute
+
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
         
 
 
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/nmap-commands/" rel="permalink">Nmap cheatsheet
-</a>
         
-      
-    </h2>
-
-    <p class="page__meta">
-      
-        <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-08-19T00:00:00+02:00">August 19, 2021 </time>&emsp;
-      
-      
-    </p>
-
-    <p class="archive__item-excerpt" itemprop="description">nmap -n -Pn -sT -p- –min-rate 3500 IP –open
-</p>
-    <i class="fas fa-tags"></i>
-    
-  </article>
-</div>
-
-      
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-08-19T00:00:00+02:00">August 19, 2021</time></p>
         
+      </footer>
 
+      
 
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+      
+  <nav class="pagination">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/useful-bash-commands/" rel="permalink">Useful bash comands
-</a>
-        
-      
-    </h2>
-
-    <p class="page__meta">
-      
-        <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-08-18T00:00:00+02:00">August 18, 2021 </time>&emsp;
-      
-      
-    </p>
-
-    <p class="archive__item-excerpt" itemprop="description">Repository of useful commands for the everyday bash usage.
-</p>
-    <i class="fas fa-tags"></i>
+      <a href="/useful-bash-commands/" class="pagination--pager" title="Useful bash comands
+">Previous</a>
     
-  </article>
-</div>
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
 
-      
-        
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/htb-writeup-delivery/" rel="permalink">Delivery - Hack The Box
-</a>
-        <img src="/assets/images/hackthebox.webp" alt="" style="height:24px; margin-left:10px">
-      
-    </h2>
-
-    <p class="page__meta">
-      
-        <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-05-22T00:00:00+02:00">May 22, 2021 </time>&emsp;
-      
-      
-    </p>
-
-    <p class="archive__item-excerpt" itemprop="description"><img src="/assets/images/htb-writeup-delivery/delivery_logo.png" alt="" style="float: right;margin-right:10px; margin-left:20px; margin-bottom:10px; height:120px;">Delivery is a quick and fun easy box where we have to create a MatterMost account and validate it by using automatic email accounts created by the OsTicket application. The admins on this platform have very poor security practices and put plaintext credentials in MatterMost. Once we get the initial shell with the creds from MatterMost we’ll poke around MySQL and get a root password bcrypt hash. Using a hint left in the MatterMost channel about the password being a variation of PleaseSubscribe!, we’ll use hashcat combined with rules to crack the password then get the root shell.
-</p>
-    <i class="fas fa-tags"></i>
-    
-      <a href="/tags/#osticket" class="page__meta btn" rel="tag">osticket</a>
-    
-      <a href="/tags/#mysql" class="page__meta btn" rel="tag">mysql</a>
-    
-      <a href="/tags/#mattermost" class="page__meta btn" rel="tag">mattermost</a>
-    
-      <a href="/tags/#hashcat" class="page__meta btn" rel="tag">hashcat</a>
-    
-      <a href="/tags/#rules" class="page__meta btn" rel="tag">rules</a>
-    
-  </article>
-</div>
-
-      
-        
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/htb-writeup-ready/" rel="permalink">Ready - Hack The Box
-</a>
-        <img src="/assets/images/hackthebox.webp" alt="" style="height:24px; margin-left:10px">
-      
-    </h2>
-
-    <p class="page__meta">
-      
-        <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-05-15T00:00:00+02:00">May 15, 2021 </time>&emsp;
-      
-      
-    </p>
-
-    <p class="archive__item-excerpt" itemprop="description"><img src="/assets/images/htb-writeup-ready/ready_logo.png" alt="" style="float: right;margin-right:10px; margin-left:20px; margin-bottom:10px; height:120px;">Ready was a pretty straighforward box to get an initial shell on: We identify that’s it running a vulnerable instance of Gitlab and we use an exploit against version 11.4.7 to land a shell. Once inside, we quickly figure out we’re in a container and by looking at the docker compose file we can see the container is running in privileged mode. We then mount the host filesystem within the container then we can access the flag or add our SSH keys to the host root user home directory.
-</p>
-    <i class="fas fa-tags"></i>
-    
-      <a href="/tags/#linux" class="page__meta btn" rel="tag">linux</a>
-    
-      <a href="/tags/#gitlab" class="page__meta btn" rel="tag">gitlab</a>
-    
-      <a href="/tags/#cve" class="page__meta btn" rel="tag">cve</a>
-    
-      <a href="/tags/#docker" class="page__meta btn" rel="tag">docker</a>
-    
-      <a href="/tags/#privileged container" class="page__meta btn" rel="tag">privileged container</a>
-    
-  </article>
-</div>
-
-      
     </div>
-    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
-  </section>
 
+    
+  </article>
 
-  </div>
+  
 </div>
+
     </div>
 
     

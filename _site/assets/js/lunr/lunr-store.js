@@ -9,8 +9,13 @@ var store = [{
         "tags": ["osticket","mysql","mattermost","hashcat","rules"],
         "url": "http://localhost:4000/htb-writeup-delivery/",
         "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"},{
-        "title": "Useful bash commands",
-        "excerpt":"Exclude a file from deletion:   rm -rf $(find . -name \"*\" ! -name \"important.txt\")   ","categories": ["bash","repository"],
-        "tags": ["rm"],
+        "title": "Useful bash comands",
+        "excerpt":"Exclude a file from deletion   rm -rf $(find . -name \"*\" ! -name \"important.txt\")   ","categories": [],
+        "tags": [],
         "url": "http://localhost:4000/useful-bash-commands/",
+        "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"},{
+        "title": "Nmap cheatsheet",
+        "excerpt":"Scan techniques -sS nmap 192.168.1.1 -sS TCP SYN port scan (Default) -sT nmap 192.168.1.1 -sT TCP connect port scan (Default without root privilege)** -sU nmap 192.168.1.1 -sU UDP port scan -sA nmap 192.168.1.1 -sA TCP ACK port scan -sW nmap 192.168.1.1 -sW TCP Window port scan -sM nmap 192.168.1.1 -sM...","categories": [],
+        "tags": [],
+        "url": "http://localhost:4000/nmap-commands/",
         "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"}]
