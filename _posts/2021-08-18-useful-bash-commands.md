@@ -16,7 +16,6 @@ tags:
 
 ## Exclude a file from deletion
 
-```
+```bash
 rm -rf $(find . -name "*" ! -name "important.txt")
-
 ```

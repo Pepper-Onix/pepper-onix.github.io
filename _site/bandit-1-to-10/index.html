@@ -9,19 +9,19 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Nmap cheatsheet - PepperOnion’s Blog</title>
-<meta name="description" content="nmap -n -Pn -sT -p- –min-rate 3500 IP –open">
+<!-- begin _includes/seo.html --><title>Bandit from 0 to 10 - PepperOnion’s Blog</title>
+<meta name="description" content="https://overthewire.org/wargames/bandit/">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="PepperOnion's Blog">
-<meta property="og:title" content="Nmap cheatsheet">
-<meta property="og:url" content="http://localhost:4000/nmap-commands/">
+<meta property="og:title" content="Bandit from 0 to 10">
+<meta property="og:url" content="http://localhost:4000/bandit-1-to-10/">
 
 
-  <meta property="og:description" content="nmap -n -Pn -sT -p- –min-rate 3500 IP –open">
+  <meta property="og:description" content="https://overthewire.org/wargames/bandit/">
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-  <meta property="article:published_time" content="2021-08-19T00:00:00+02:00">
+  <meta property="article:published_time" content="2021-08-24T00:00:00+02:00">
 
 
 
@@ -42,7 +42,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/nmap-commands/">
+<link rel="canonical" href="http://localhost:4000/bandit-1-to-10/">
 
 
 
@@ -166,7 +166,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Nmap cheatsheet</li>
+        <li class="current">Bandit from 0 to 10</li>
       
     
   </ol>
@@ -294,15 +294,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Nmap cheatsheet">
-    <meta itemprop="description" content="nmap -n -Pn -sT -p- –min-rate 3500 IP –open">
-    <meta itemprop="datePublished" content="August 19, 2021">
+    <meta itemprop="headline" content="Bandit from 0 to 10">
+    <meta itemprop="description" content="https://overthewire.org/wargames/bandit/">
+    <meta itemprop="datePublished" content="August 24, 2021">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Nmap cheatsheet
+          <h1 id="page-title" class="page__title" itemprop="headline">Bandit from 0 to 10
 </h1>
           
         </header>
@@ -312,40 +312,76 @@
         
         <p class="page__meta">
           
-            <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-08-19T00:00:00+02:00">August 19, 2021 </time>&emsp;
+            <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-08-24T00:00:00+02:00">August 24, 2021 </time>&emsp;
           
           
         </p>
-        <h2 id="scan-techniques">Scan techniques</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	-sS	nmap 192.168.1.1 -sS	 	TCP SYN port scan (Default)
--sT 		nmap 192.168.1.1 -sT 		TCP connect port scan (Default without root privilege). 
-	-sU	nmap 192.168.1.1 -sU	 	UDP port scan
-	-sA 	nmap 192.168.1.1 -sA 		TCP ACK port scan
-	-sW 	nmap 192.168.1.1 -sW 		TCP Window port scan
-	-sM 	nmap 192.168.1.1 -sM 		TCP Maimon port scan
+        <h2 id="level-0-to-level-1">Level 0 to Level 1</h2>
 
-</code></pre></div></div>
-<h2 id="host-discovery">Host discovery</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	-sL 	nmap 192.168.1.1-3 -sL 		No Scan. List targets only
-	-sn 	nmap 192.168.1.1/24 -sn 	Disable port scanning
--Pn 		nmap 192.168.1.1-5 -Pn 		Disable host discovery. Port scan only
-	-PR 	nmap 192.168.1.1-1/24 -PR 	ARP discovery on local network
--n 		nmap 192.168.1.1 -n 		Never do DNS resolution
+<h3 id="the-levels-statement">THE LEVEL’S STATEMENT</h3>
+<p><em>The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</em></p>
 
-</code></pre></div></div>
-
-<h2 id="service-and-version-detection">Service and version detection</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-sV 					nmap 192.168.1.1 -sV 					Attempts to determine the version of the service running on port
-	-sV --version-intensity 	nmap 192.168.1.1 -sV --version-intensity 8 		Intensity level 0 to 9. Higher number increases possibility of correctness
-	-sV --version-light 		nmap 192.168.1.1 -sV --version-light 			[Faster] Enable light mode. Lower possibility of correctness.
-	-sV --version-all 		nmap 192.168.1.1 -sV --version-all 			[Slower] Enable intensity level 9. Higher possibility of correctness.
--A 					nmap 192.168.1.1 -A 					Enables OS detection, version detection, script scanning, and traceroute
--O					nmap 192.168.1.1 -O					Remote OS detection using TCP/IP stack fingerprinting
-	-O --osscan-limit		nmap 192.168.1.1 -O --osscan-limit			[Faster] If at least one open and one closed TCP port are not found it will not try OS detection against host. 
-	-O --osscan-guess		nmap 192.168.1.1 -O --osscan-guess			[Slower] Makes Nmap guess more aggressively
+<h3 id="commands">COMMANDS</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; whatis ls                                                                         
+ls (1)          - list directory contents
+                                                                                                                        
+&gt; whatis cd
+cd  (1)         - change working directory
+                                                                                                                        
+&gt; whatis cat                                                                                                     
+cat (1)         - concatenate files and print on the standard output
+                                                                                                                        
+&gt; whatis file
+file (1)        - determine file type
+                                                                                                                        
+&gt; whatis du  
+du (1)          - estimate file space usage
+                                                                                                                        
+&gt; whatis find
+find (1)        - search for files in a directory hierarchy
 
 </code></pre></div></div>
 
+<h3 id="solution">SOLUTION</h3>
+
+<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command. (The “pwd” command can be used to view the current working directory).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>readme
+</code></pre></div></div>
+<p>We see there is an file named <code class="language-plaintext highlighter-rouge">readme</code> to view the contents of this file we can use the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">cat </span>readme 
+boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+</code></pre></div></div>
+<p>We have found the password for the next level !!</p>
+
+<h2 id="level-1-to-level-2">Level 1 to Level 2</h2>
+
+<h3 id="the-levels-statement-1">THE LEVEL’S STATEMENT</h3>
+
+<p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">—</code> located in the home directory</em></p>
+
+<h3 id="commands-1">COMMANDS</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; whatis ls                                                                         
+ls (1)          - list directory contents
+                                                                                                                        
+&gt; whatis cd
+cd  (1)         - change working directory
+                                                                                                                        
+&gt; whatis cat                                                                                                     
+cat (1)         - concatenate files and print on the standard output
+                                                                                                                        
+&gt; whatis file
+file (1)        - determine file type
+                                                                                                                        
+&gt; whatis du  
+du (1)          - estimate file space usage
+                                                                                                                        
+&gt; whatis find
+find (1)        - search for files in a directory hierarchy
+
+</code></pre></div></div>
 
         
       </section>
@@ -366,19 +402,7 @@
     
       
       
-      <a href="/tags/" class="page__taxonomy-item" rel="tag"></a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#nmap" class="page__taxonomy-item" rel="tag">nmap</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#apunts" class="page__taxonomy-item" rel="tag">apunts</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/" class="page__taxonomy-item" rel="tag"></a>
+      <a href="/tags/#bandit" class="page__taxonomy-item" rel="tag">bandit</a>
     
     </span>
   </p>
@@ -399,14 +423,14 @@
     
       
       
-      <a href="/categories/#apuntes" class="page__taxonomy-item" rel="tag">apuntes</a>
+      <a href="/categories/#ctf" class="page__taxonomy-item" rel="tag">CTF</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-08-19T00:00:00+02:00">August 19, 2021</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-08-24T00:00:00+02:00">August 24, 2021</time></p>
         
       </footer>
 
@@ -415,12 +439,11 @@
       
   <nav class="pagination">
     
-      <a href="/useful-bash-commands/" class="pagination--pager" title="Useful bash comands
+      <a href="/nmap-commands/" class="pagination--pager" title="Nmap cheatsheet
 ">Previous</a>
     
     
-      <a href="/bandit-1-to-10/" class="pagination--pager" title="Bandit from 0 to 10
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 

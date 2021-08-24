@@ -10,12 +10,17 @@ var store = [{
         "url": "http://localhost:4000/htb-writeup-delivery/",
         "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"},{
         "title": "Useful bash comands",
-        "excerpt":"Exclude a file from deletion   rm -rf $(find . -name \"*\" ! -name \"important.txt\")   ","categories": [],
+        "excerpt":"Exclude a file from deletion   rm -rf $(find . -name \"*\" ! -name \"important.txt\")  ","categories": [],
         "tags": [],
         "url": "http://localhost:4000/useful-bash-commands/",
         "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"},{
         "title": "Nmap cheatsheet",
-        "excerpt":"Scan techniques -sS nmap 192.168.1.1 -sS TCP SYN port scan (Default) -sT nmap 192.168.1.1 -sT TCP connect port scan (Default without root privilege)** -sU nmap 192.168.1.1 -sU UDP port scan -sA nmap 192.168.1.1 -sA TCP ACK port scan -sW nmap 192.168.1.1 -sW TCP Window port scan -sM nmap 192.168.1.1 -sM...","categories": [],
-        "tags": [],
+        "excerpt":"Scan techniques -sS nmap 192.168.1.1 -sS TCP SYN port scan (Default) -sT nmap 192.168.1.1 -sT TCP connect port scan (Default without root privilege). -sU nmap 192.168.1.1 -sU UDP port scan -sA nmap 192.168.1.1 -sA TCP ACK port scan -sW nmap 192.168.1.1 -sW TCP Window port scan -sM nmap 192.168.1.1 -sM...","categories": ["apuntes"],
+        "tags": ["nmap,","apunts"],
         "url": "http://localhost:4000/nmap-commands/",
+        "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"},{
+        "title": "Bandit from 0 to 10",
+        "excerpt":"Level 0 to Level 1 THE LEVEL’S STATEMENT The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log...","categories": ["CTF"],
+        "tags": ["bandit"],
+        "url": "http://localhost:4000/bandit-1-to-10/",
         "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"}]

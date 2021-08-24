@@ -1,6 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-08-19T01:46:09+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">PepperOnion’s Blog</title><subtitle>PepperOnion's personal blog. Security and Linux stuff.</subtitle><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><entry><title type="html">Nmap cheatsheet</title><link href="http://localhost:4000/nmap-commands/" rel="alternate" type="text/html" title="Nmap cheatsheet" /><published>2021-08-19T00:00:00+02:00</published><updated>2021-08-19T00:00:00+02:00</updated><id>http://localhost:4000/nmap-commands</id><content type="html" xml:base="http://localhost:4000/nmap-commands/">&lt;h2 id=&quot;scan-techniques&quot;&gt;Scan techniques&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-08-24T20:54:19+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">PepperOnion’s Blog</title><subtitle>PepperOnion's personal blog. Security and Linux stuff.</subtitle><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><entry><title type="html">Bandit from 0 to 10</title><link href="http://localhost:4000/bandit-1-to-10/" rel="alternate" type="text/html" title="Bandit from 0 to 10" /><published>2021-08-24T00:00:00+02:00</published><updated>2021-08-24T00:00:00+02:00</updated><id>http://localhost:4000/bandit-1-to-10</id><content type="html" xml:base="http://localhost:4000/bandit-1-to-10/">&lt;h2 id=&quot;level-0-to-level-1&quot;&gt;Level 0 to Level 1&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;commands&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; whatis ls                                                                         
+ls (1)          - list directory contents
+                                                                                                                        
+&amp;gt; whatis cd
+cd  (1)         - change working directory
+                                                                                                                        
+&amp;gt; whatis cat                                                                                                     
+cat (1)         - concatenate files and print on the standard output
+                                                                                                                        
+&amp;gt; whatis file
+file (1)        - determine file type
+                                                                                                                        
+&amp;gt; whatis du  
+du (1)          - estimate file space usage
+                                                                                                                        
+&amp;gt; whatis find
+find (1)        - search for files in a directory hierarchy
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;solution&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;View the files that are present in the current working directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command. (The “pwd” command can be used to view the current working directory).&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit0@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;readme
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We see there is an file named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;readme&lt;/code&gt; to view the contents of this file we can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit0@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;readme 
+boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We have found the password for the next level !!&lt;/p&gt;
+
+&lt;h2 id=&quot;level-1-to-level-2&quot;&gt;Level 1 to Level 2&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-1&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;The password for the next level is stored in a file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;—&lt;/code&gt; located in the home directory&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;commands-1&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; whatis ls                                                                         
+ls (1)          - list directory contents
+                                                                                                                        
+&amp;gt; whatis cd
+cd  (1)         - change working directory
+                                                                                                                        
+&amp;gt; whatis cat                                                                                                     
+cat (1)         - concatenate files and print on the standard output
+                                                                                                                        
+&amp;gt; whatis file
+file (1)        - determine file type
+                                                                                                                        
+&amp;gt; whatis du  
+du (1)          - estimate file space usage
+                                                                                                                        
+&amp;gt; whatis find
+find (1)        - search for files in a directory hierarchy
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="CTF" /><category term="bandit" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Nmap cheatsheet</title><link href="http://localhost:4000/nmap-commands/" rel="alternate" type="text/html" title="Nmap cheatsheet" /><published>2021-08-19T00:00:00+02:00</published><updated>2021-08-19T00:00:00+02:00</updated><id>http://localhost:4000/nmap-commands</id><content type="html" xml:base="http://localhost:4000/nmap-commands/">&lt;h2 id=&quot;scan-techniques&quot;&gt;Scan techniques&lt;/h2&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	-sS	nmap 192.168.1.1 -sS	 	TCP SYN port scan (Default)
--sT 		nmap 192.168.1.1 -sT 		TCP connect port scan (Default without root privilege)**
+-sT 		nmap 192.168.1.1 -sT 		TCP connect port scan (Default without root privilege). 
 	-sU	nmap 192.168.1.1 -sU	 	UDP port scan
 	-sA 	nmap 192.168.1.1 -sA 		TCP ACK port scan
 	-sW 	nmap 192.168.1.1 -sW 		TCP Window port scan
@@ -19,14 +84,16 @@
 &lt;h2 id=&quot;service-and-version-detection&quot;&gt;Service and version detection&lt;/h2&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-sV 					nmap 192.168.1.1 -sV 					Attempts to determine the version of the service running on port
 	-sV --version-intensity 	nmap 192.168.1.1 -sV --version-intensity 8 		Intensity level 0 to 9. Higher number increases possibility of correctness
-	-sV --version-light 		nmap 192.168.1.1 -sV --version-light 			Enable light mode. Lower possibility of correctness. Faster
-	-sV --version-all 		nmap 192.168.1.1 -sV --version-all 			Enable intensity level 9. Higher possibility of correctness. Slower
+	-sV --version-light 		nmap 192.168.1.1 -sV --version-light 			[Faster] Enable light mode. Lower possibility of correctness.
+	-sV --version-all 		nmap 192.168.1.1 -sV --version-all 			[Slower] Enable intensity level 9. Higher possibility of correctness.
 -A 					nmap 192.168.1.1 -A 					Enables OS detection, version detection, script scanning, and traceroute
+-O					nmap 192.168.1.1 -O					Remote OS detection using TCP/IP stack fingerprinting
+	-O --osscan-limit		nmap 192.168.1.1 -O --osscan-limit			[Faster] If at least one open and one closed TCP port are not found it will not try OS detection against host. 
+	-O --osscan-guess		nmap 192.168.1.1 -O --osscan-guess			[Slower] Makes Nmap guess more aggressively
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><summary type="html">nmap -n -Pn -sT -p- --min-rate 3500 IP --open</summary></entry><entry><title type="html">Useful bash comands</title><link href="http://localhost:4000/useful-bash-commands/" rel="alternate" type="text/html" title="Useful bash comands" /><published>2021-08-18T00:00:00+02:00</published><updated>2021-08-18T00:00:00+02:00</updated><id>http://localhost:4000/useful-bash-commands</id><content type="html" xml:base="http://localhost:4000/useful-bash-commands/">&lt;h2 id=&quot;exclude-a-file-from-deletion&quot;&gt;Exclude a file from deletion&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="apuntes" /><category term="nmap," /><category term="apunts" /><summary type="html">nmap -n -Pn -sT -p- --min-rate 3500 IP --open</summary></entry><entry><title type="html">Useful bash comands</title><link href="http://localhost:4000/useful-bash-commands/" rel="alternate" type="text/html" title="Useful bash comands" /><published>2021-08-18T00:00:00+02:00</published><updated>2021-08-18T00:00:00+02:00</updated><id>http://localhost:4000/useful-bash-commands</id><content type="html" xml:base="http://localhost:4000/useful-bash-commands/">&lt;h2 id=&quot;exclude-a-file-from-deletion&quot;&gt;Exclude a file from deletion&lt;/h2&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rm -rf $(find . -name &quot;*&quot; ! -name &quot;important.txt&quot;)
-
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;*&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;important.txt&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><summary type="html">Repository of useful commands for the everyday bash usage.</summary></entry><entry><title type="html">Delivery - Hack The Box</title><link href="http://localhost:4000/htb-writeup-delivery/" rel="alternate" type="text/html" title="Delivery - Hack The Box" /><published>2021-05-22T00:00:00+02:00</published><updated>2021-05-22T00:00:00+02:00</updated><id>http://localhost:4000/htb-writeup-delivery</id><content type="html" xml:base="http://localhost:4000/htb-writeup-delivery/">&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/delivery_logo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Delivery is a quick and fun easy box where we have to create a MatterMost account and validate it by using automatic email accounts created by the OsTicket application. The admins on this platform have very poor security practices and put plaintext credentials in MatterMost. Once we get the initial shell with the creds from MatterMost we’ll poke around MySQL and get a root password bcrypt hash. Using a hint left in the MatterMost channel about the password being a variation of PleaseSubscribe!, we’ll use hashcat combined with rules to crack the password then get the root shell.&lt;/p&gt;
