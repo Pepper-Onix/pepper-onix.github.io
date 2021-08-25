@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Bandit from 0 to 10 - PepperOnion’s Blog</title>
+<!-- begin _includes/seo.html --><title>Bandit from 0 to 3 - PepperOnion’s Blog</title>
 <meta name="description" content="https://overthewire.org/wargames/bandit/">
 
 
@@ -17,8 +17,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="PepperOnion's Blog">
-<meta property="og:title" content="Bandit from 0 to 10">
-<meta property="og:url" content="http://localhost:4000/bandit-1-to-10/">
+<meta property="og:title" content="Bandit from 0 to 3">
+<meta property="og:url" content="http://localhost:4000/bandit-0-to-3/">
 
 
   <meta property="og:description" content="https://overthewire.org/wargames/bandit/">
@@ -42,7 +42,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/bandit-1-to-10/">
+<link rel="canonical" href="http://localhost:4000/bandit-0-to-3/">
 
 
 
@@ -166,7 +166,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Bandit from 0 to 10</li>
+        <li class="current">Bandit from 0 to 3</li>
       
     
   </ol>
@@ -294,7 +294,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Bandit from 0 to 10">
+    <meta itemprop="headline" content="Bandit from 0 to 3">
     <meta itemprop="description" content="https://overthewire.org/wargames/bandit/">
     <meta itemprop="datePublished" content="August 24, 2021">
     
@@ -302,7 +302,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Bandit from 0 to 10
+          <h1 id="page-title" class="page__title" itemprop="headline">Bandit from 0 to 3
 </h1>
           
         </header>
@@ -319,7 +319,9 @@
         <h2 id="level-0-to-level-1">Level 0 to Level 1</h2>
 
 <h3 id="the-levels-statement">THE LEVEL’S STATEMENT</h3>
-<p><em>The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</em></p>
+<blockquote>
+  <p><em>The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</em></p>
+</blockquote>
 
 <h3 id="commands">COMMANDS</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; whatis ls                                                                         
@@ -349,7 +351,7 @@ find (1)        - search for files in a directory hierarchy
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">ls
 </span>readme
 </code></pre></div></div>
-<p>We see there is an file named <code class="language-plaintext highlighter-rouge">readme</code> to view the contents of this file we can use the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
+<p>We see there is a file named <code class="language-plaintext highlighter-rouge">readme</code> to view the contents of this file we can use the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">cat </span>readme 
 boJ9jbbUNNfktd78OOpsqOltutMc3MY1
@@ -360,7 +362,9 @@ boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 
 <h3 id="the-levels-statement-1">THE LEVEL’S STATEMENT</h3>
 
-<p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">—</code> located in the home directory</em></p>
+<blockquote>
+  <p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">—</code> located in the home directory</em></p>
+</blockquote>
 
 <h3 id="commands-1">COMMANDS</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; whatis ls                                                                         
@@ -382,6 +386,65 @@ du (1)          - estimate file space usage
 find (1)        - search for files in a directory hierarchy
 
 </code></pre></div></div>
+<h3 id="solution-1">SOLUTION</h3>
+
+<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit1@bandit:~<span class="nv">$ </span><span class="nb">ls</span>
+-
+</code></pre></div></div>
+<p>We can view the content of file named <code class="language-plaintext highlighter-rouge">-</code> using the <code class="language-plaintext highlighter-rouge">cat</code> command. <strong>NOTE:</strong> <code class="language-plaintext highlighter-rouge">-</code> in Linux refers to Standard Input/ Standard Output (STDIN/ STDOUT). So We have to use the concept of redirection or specify the absolute path to the file to access it.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit1@bandit:~<span class="nv">$ </span><span class="nb">cat</span> &lt; -
+CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+bandit1@bandit:~<span class="nv">$ </span><span class="nb">cat</span> ./-
+CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+</code></pre></div></div>
+<p>We have found the password for the next level !</p>
+
+<h2 id="level-2-to-level-3">Level 2 to Level 3</h2>
+
+<h2 id="the-levels-statement-2">The Level’s statement</h2>
+
+<blockquote>
+  <p>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">spaces in this filename</code> located in the home directory.</p>
+</blockquote>
+
+<h3 id="commands-2">COMMANDS</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; whatis ls                                                                         
+ls (1)          - list directory contents
+                                                                                                                        
+&gt; whatis cd
+cd  (1)         - change working directory
+                                                                                                                        
+&gt; whatis cat                                                                                                     
+cat (1)         - concatenate files and print on the standard output
+                                                                                                                        
+&gt; whatis file
+file (1)        - determine file type
+                                                                                                                        
+&gt; whatis du  
+du (1)          - estimate file space usage
+                                                                                                                        
+&gt; whatis find
+find (1)        - search for files in a directory hierarchy
+
+</code></pre></div></div>
+
+<h2 id="solution-2">SOLUTION</h2>
+
+<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit2@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>spaces <span class="k">in </span>this filename
+</code></pre></div></div>
+<p>View the content of the file named spaces in this filename using the cat command. <strong>NOTE:</strong> The spaces in the name can be escaped using \ , another approach is to enclosing the filename in “” (quotes).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit2@bandit:~<span class="nv">$ </span><span class="nb">cat </span>spaces<span class="se">\ </span><span class="k">in</span><span class="se">\ </span>this<span class="se">\ </span>filename
+UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+bandit2@bandit:~<span class="nv">$ </span><span class="nb">cat</span> <span class="s2">"spaces in this filename"</span>
+UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+</code></pre></div></div>
+<p>We have found the password for the next level !</p>
 
         
       </section>
@@ -423,7 +486,7 @@ find (1)        - search for files in a directory hierarchy
     
       
       
-      <a href="/categories/#ctf" class="page__taxonomy-item" rel="tag">CTF</a>
+      <a href="/categories/#overthewire" class="page__taxonomy-item" rel="tag">OverTheWire</a>
     
     </span>
   </p>
@@ -443,7 +506,8 @@ find (1)        - search for files in a directory hierarchy
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/bandit-3-to-6/" class="pagination--pager" title="Bandit from 3 to 6
+">Next</a>
     
   </nav>
 

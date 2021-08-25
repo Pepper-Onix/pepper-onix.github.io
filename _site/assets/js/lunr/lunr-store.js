@@ -19,8 +19,13 @@ var store = [{
         "tags": ["nmap,","apunts"],
         "url": "http://localhost:4000/nmap-commands/",
         "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"},{
-        "title": "Bandit from 0 to 10",
-        "excerpt":"Level 0 to Level 1 THE LEVEL’S STATEMENT The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log...","categories": ["CTF"],
+        "title": "Bandit from 0 to 3",
+        "excerpt":"Level 0 to Level 1 THE LEVEL’S STATEMENT The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log...","categories": ["OverTheWire"],
         "tags": ["bandit"],
-        "url": "http://localhost:4000/bandit-1-to-10/",
+        "url": "http://localhost:4000/bandit-0-to-3/",
+        "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"},{
+        "title": "Bandit from 3 to 6",
+        "excerpt":"Level 3 to Level 4 THE LEVEL’S STATEMENT The password for the next level is stored in a hidden file in the inhere directory. COMMANDS &gt; whatis ls ls (1) - list directory contents &gt; whatis cd cd (1) - change working directory &gt; whatis cat cat (1) - concatenate...","categories": ["OverTheWire"],
+        "tags": ["bandit"],
+        "url": "http://localhost:4000/bandit-3-to-6/",
         "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"}]

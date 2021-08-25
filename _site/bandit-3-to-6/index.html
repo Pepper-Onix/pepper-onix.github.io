@@ -1,0 +1,641 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Bandit from 3 to 6 - PepperOnion’s Blog</title>
+<meta name="description" content="https://overthewire.org/wargames/bandit/">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="PepperOnion's Blog">
+<meta property="og:title" content="Bandit from 3 to 6">
+<meta property="og:url" content="http://localhost:4000/bandit-3-to-6/">
+
+
+  <meta property="og:description" content="https://overthewire.org/wargames/bandit/">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2021-08-24T00:00:00+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/bandit-3-to-6/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "PepperOnion",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="PepperOnion's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/masthead.png" alt=""></a>
+                
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/" >Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+    
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        <li class="current">Bandit from 3 to 6</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/avatar.png" alt="PepperOnion" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">PepperOnion</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Pentesting4fun
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:pentesting4free@gmail.com">
+            <meta itemprop="email" content="pentesting4free@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/albertsanuy" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Bandit from 3 to 6">
+    <meta itemprop="description" content="https://overthewire.org/wargames/bandit/">
+    <meta itemprop="datePublished" content="August 24, 2021">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Bandit from 3 to 6
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p class="page__meta">
+          
+            <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-08-24T00:00:00+02:00">August 24, 2021 </time>&emsp;
+          
+          
+        </p>
+        <h2 id="level-3-to-level-4">Level 3 to Level 4</h2>
+
+<h3 id="the-levels-statement">THE LEVEL’S STATEMENT</h3>
+
+<blockquote>
+  <p>The password for the next level is stored in a hidden file in the inhere directory.</p>
+</blockquote>
+
+<h3 id="commands">COMMANDS</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; whatis ls                                                                         
+ls (1)          - list directory contents
+                                                                                                                        
+&gt; whatis cd
+cd  (1)         - change working directory
+                                                                                                                        
+&gt; whatis cat                                                                                                     
+cat (1)         - concatenate files and print on the standard output
+                                                                                                                        
+&gt; whatis file
+file (1)        - determine file type
+                                                                                                                        
+&gt; whatis du  
+du (1)          - estimate file space usage
+                                                                                                                        
+&gt; whatis find
+find (1)        - search for files in a directory hierarchy
+
+</code></pre></div></div>
+
+<h3 id="solution">SOLUTION</h3>
+
+<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit3@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>inhere
+</code></pre></div></div>
+<p>Move into the <code class="language-plaintext highlighter-rouge">inhere/</code> directory. This can be done using the <code class="language-plaintext highlighter-rouge">cd</code> command</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit3@bandit:~<span class="nv">$ </span><span class="nb">cd </span>inhere/
+</code></pre></div></div>
+<p>View files that are in the directory using the <code class="language-plaintext highlighter-rouge">ls</code> command. Since we know the file is hidden we have to use the <code class="language-plaintext highlighter-rouge">-a</code> flag to view hidden files.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit3@bandit:~/inhere<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-a</span>
+<span class="nb">.</span>
+..
+.hidden
+</code></pre></div></div>
+<p>View the content of <code class="language-plaintext highlighter-rouge">.hidden</code> file using the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
+
+<p>```bashCommand Explanation
+. : Search the current working directory only
+-type f : Look for files only (Exclude Directories)
+-size 1033c : Look for files that are exactly 1033 bytes in size (Find uses “c” to represent bytes)
+-not -executable : Find only non executable files
+-exec file {} + : Execute the file command on all the results returns by find
+bandit3@bandit:~/inhere$ cat .hidden
+pIwrPrtPN36QITSp3EQaw936yaFoFgAB</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>We have found the password for the next level!
+
+
+## Level 4 to Level 5
+
+### THE LEVEL'S STATEMENT
+
+&gt;The password for the next level is stored in the only human-readable file in the inhere directory.
+&gt;Tip: if your terminal is messed up, try the “reset” command.
+
+### COMMANDS
+
+</code></pre></div></div>
+<blockquote>
+  <p>whatis ls                                                                       <br />
+ls (1)          - list directory contents</p>
+</blockquote>
+
+<blockquote>
+  <p>whatis cd
+cd  (1)         - change working directory</p>
+</blockquote>
+
+<blockquote>
+  <p>whatis cat                                                                                                   <br />
+cat (1)         - concatenate files and print on the standard output</p>
+</blockquote>
+
+<blockquote>
+  <p>whatis file
+file (1)        - determine file type</p>
+</blockquote>
+
+<blockquote>
+  <p>whatis du<br />
+du (1)          - estimate file space usage</p>
+</blockquote>
+
+<blockquote>
+  <p>whatis find
+find (1)        - search for files in a directory hierarchy</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>### SOLUTION
+
+View the files that are present in the current working directory using the `ls` command. Next move into the `inhere/` directory. This can be done using the `cd` command. 
+
+```bash
+bandit4@bandit:~$ ls
+inhere
+
+bandit4@bandit:~$ cd inhere/
+</code></pre></div></div>
+<p>View files that are in the directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit4@bandit:~/inhere<span class="nv">$ </span><span class="nb">ls</span>
+<span class="nt">-file00</span>  <span class="nt">-file01</span>  <span class="nt">-file02</span>  <span class="nt">-file03</span>  <span class="nt">-file04</span>  <span class="nt">-file05</span>  <span class="nt">-file06</span>  <span class="nt">-file07</span>  <span class="nt">-file08</span>  <span class="nt">-file09</span>
+</code></pre></div></div>
+<p>We know we have to find file who’s content is in Human Readable format. This check can be performed using the <code class="language-plaintext highlighter-rouge">file</code> command. File command returns the type of data that is found in the file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit4@bandit:~/inhere<span class="nv">$ </span>file ./<span class="k">*</span>
+./-file00: data
+./-file01: data
+./-file02: data
+./-file03: data
+./-file04: data
+./-file05: data
+./-file06: data
+./-file07: ASCII text
+./-file08: data
+./-file09: data
+</code></pre></div></div>
+<p>View the content of <code class="language-plaintext highlighter-rouge">-file07</code> file using the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit4@bandit:~/inhere<span class="nv">$ </span><span class="nb">cat</span> ./-file07
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+</code></pre></div></div>
+<p>We have found the password for the next level!</p>
+
+<h2 id="level-5-to-level-6">Level 5 to Level 6</h2>
+
+<h3 id="the-levels-statement-1">THE LEVEL’S STATEMENT</h3>
+
+<blockquote>
+  <p>The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:</p>
+
+  <ul>
+    <li>human-readable</li>
+    <li>1033 bytes in size</li>
+    <li>not executable</li>
+  </ul>
+</blockquote>
+
+<h3 id="commands-1">COMMANDS</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; whatis ls                                                                         
+ls (1)          - list directory contents
+                                                                                                                        
+&gt; whatis cd
+cd  (1)         - change working directory
+                                                                                                                        
+&gt; whatis cat                                                                                                     
+cat (1)         - concatenate files and print on the standard output
+                                                                                                                        
+&gt; whatis file
+file (1)        - determine file type
+                                                                                                                        
+&gt; whatis du  
+du (1)          - estimate file space usage
+                                                                                                                        
+&gt; whatis find
+find (1)        - search for files in a directory hierarchy
+
+</code></pre></div></div>
+
+<h2 id="solution-1">SOLUTION</h2>
+
+<p>View files that are in the <code class="language-plaintext highlighter-rouge">inhere</code> directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit5@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>inhere
+bandit5@bandit:~<span class="nv">$ </span><span class="nb">cd </span>inhere/
+bandit5@bandit:~/inhere<span class="nv">$ </span><span class="nb">ls
+</span>maybehere00  maybehere03  maybehere06  maybehere09  maybehere12  maybehere15  maybehere18
+maybehere01  maybehere04  maybehere07  maybehere10  maybehere13  maybehere16  maybehere19
+maybehere02  maybehere05  maybehere08  maybehere11  maybehere14  maybehere17
+
+</code></pre></div></div>
+
+<p>To search for the file that we require using the properties that are specified in the question we can make use of the <code class="language-plaintext highlighter-rouge">find</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit5@bandit:~/inhere<span class="nv">$ </span>find <span class="nb">.</span> <span class="nt">-type</span> f <span class="nt">-size</span> 1033c <span class="nt">-not</span> <span class="nt">-executable</span> <span class="nt">-exec</span> file <span class="o">{}</span> + | <span class="nb">grep </span>ASCII
+./maybehere07/.file2: ASCII text, with very long lines
+</code></pre></div></div>
+<blockquote>
+  <h2 id="command-explanation">Command Explanation</h2>
+  <ul>
+    <li>. : Search the current working directory only</li>
+    <li>-type f : Look for files only (Exclude Directories)</li>
+    <li>-size 1033c : Look for files that are exactly 1033 bytes in size (Find uses “c” to represent bytes)</li>
+    <li>-not -executable : Find only non executable files</li>
+    <li>-exec file {} + : Execute the file command on all the results returns by find</li>
+  </ul>
+
+  <p><strong>NOTE:</strong> {} is an placeholder for the location where the names of the files found by find is going to be substituted. The “+” sign is used to terminate the statemen.</p>
+</blockquote>
+
+<p>From the previous level we know that file command will return value “ASCII Text” for human readable files. So by using grep we are filtering the output to only show results with that contain that string. 
+The pipe (|) operator is used to pass the output of one command as the input of another command. 
+Finally we print the content of the file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ./maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+</code></pre></div></div>
+<p>We have found the password for the next level!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#bandit" class="page__taxonomy-item" rel="tag">bandit</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#overthewire" class="page__taxonomy-item" rel="tag">OverTheWire</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-08-24T00:00:00+02:00">August 24, 2021</time></p>
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/bandit-0-to-3/" class="pagination--pager" title="Bandit from 0 to 3
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+</div>
+
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 PepperOnion</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script data-search-pseudo-elements defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>
