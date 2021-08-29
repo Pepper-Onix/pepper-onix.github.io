@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Bandit from level 0 to level 3 - PepperOnion’s Blog</title>
+<!-- begin _includes/seo.html --><title>Bandit from 3 to 6 - PepperOnion’s Blog</title>
 <meta name="description" content="https://overthewire.org/wargames/bandit/">
 
 
@@ -17,8 +17,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="PepperOnion's Blog">
-<meta property="og:title" content="Bandit from level 0 to level 3">
-<meta property="og:url" content="http://localhost:4000/bandit-0-to-3/">
+<meta property="og:title" content="Bandit from 3 to 6">
+<meta property="og:url" content="http://localhost:4000/bandit-3-to-6.md/">
 
 
   <meta property="og:description" content="https://overthewire.org/wargames/bandit/">
@@ -42,7 +42,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/bandit-0-to-3/">
+<link rel="canonical" href="http://localhost:4000/bandit-3-to-6.md/">
 
 
 
@@ -166,7 +166,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Bandit from level 0 to level 3</li>
+        <li class="current">Bandit from 3 to 6</li>
       
     
   </ol>
@@ -294,7 +294,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Bandit from level 0 to level 3">
+    <meta itemprop="headline" content="Bandit from 3 to 6">
     <meta itemprop="description" content="https://overthewire.org/wargames/bandit/">
     <meta itemprop="datePublished" content="August 24, 2021">
     
@@ -302,7 +302,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Bandit from level 0 to level 3
+          <h1 id="page-title" class="page__title" itemprop="headline">Bandit from 3 to 6
 </h1>
           
         </header>
@@ -316,145 +316,175 @@
           
           
         </p>
-        <h2 id="level-0-to-level-1">Level 0 to Level 1</h2>
+        ## Level 3 to Level 4
 
-<h3 id="the-levels-statement">THE LEVEL’S STATEMENT</h3>
-<blockquote>
-  <p><em>The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</em></p>
-</blockquote>
+### THE LEVEL'S STATEMENT
 
-<h3 id="commands">COMMANDS</h3>
+>The password for the next level is stored in a hidden file in the inhere directory.
 
-<blockquote>
-  <p><em>ls     - list directory contents.</em></p>
-</blockquote>
+### COMMANDS
 
-<blockquote>
-  <p><em>cd     - change working directory.</em>
-                                                                                                                                                                           &gt;
-<em>cat    - concatenate files and print on the standard output.</em></p>
-</blockquote>
+> *ls     - list directory contents.*
+                                                                                                                        
+> *cd     - change working directory.*
+                                                                                                                                                                           >
+> *cat    - concatenate files and print on the standard output.*
+                                                                                                                       
+> *file   - determine file type.*
+                                                                                                                        
+> *du     - estimate file space usage.*
+                                                                                                                        
+> *find   - search for files in a directory hierarchy.*
 
-<blockquote>
-  <p><em>file   - determine file type.</em></p>
-</blockquote>
+### SOLUTION
 
-<blockquote>
-  <p><em>du     - estimate file space usage.</em></p>
-</blockquote>
+View the files that are present in the current working directory using the `ls` command.
 
-<blockquote>
-  <p><em>find   - search for files in a directory hierarchy.</em></p>
-</blockquote>
+```bash
+bandit3@bandit:~$ ls
+inhere
+```
+Move into the `inhere/` directory. This can be done using the `cd` command
 
-<h3 id="solution">SOLUTION</h3>
+```bash
+bandit3@bandit:~$ cd inhere/
+```
+View files that are in the directory using the `ls` command. Since we know the file is hidden we have to use the `-a` flag to view hidden files.
 
-<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command. (The “pwd” command can be used to view the current working directory).</p>
+```bash
+bandit3@bandit:~/inhere$ ls -a
+.
+..
+.hidden
+```
+View the content of `.hidden` file using the `cat` command.
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">ls
-</span>readme
-</code></pre></div></div>
-<p>We see there is a file named <code class="language-plaintext highlighter-rouge">readme</code> to view the contents of this file we can use the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
+We have found the password for the next level!
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">cat </span>readme 
-boJ9jbbUNNfktd78OOpsqOltutMc3MY1
-</code></pre></div></div>
-<p>We have found the password for the next level !!</p>
 
-<h2 id="level-1-to-level-2">Level 1 to Level 2</h2>
+## Level 4 to Level 5
 
-<h3 id="the-levels-statement-1">THE LEVEL’S STATEMENT</h3>
+### THE LEVEL'S STATEMENT
 
-<blockquote>
-  <p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">—</code> located in the home directory</em></p>
-</blockquote>
+>*The password for the next level is stored in the only human-readable file in the inhere directory.*
+>*Tip: if your terminal is messed up, try the “reset” command.*
 
-<h3 id="commands-1">COMMANDS</h3>
+### COMMANDS
 
-<blockquote>
-  <p><em>ls     - list directory contents.</em></p>
-</blockquote>
+> *ls     - list directory contents.*
+                                                                                                                        
+> *cd     - change working directory.*
+                                                                                                                                                                           >
+> *cat    - concatenate files and print on the standard output.*
+                                                                                                                       
+> *file   - determine file type.*
+                                                                                                                        
+> *du     - estimate file space usage.*
+                                                                                                                        
+> *find   - search for files in a directory hierarchy.*
 
-<blockquote>
-  <p><em>cd     - change working directory.</em>
-                                                                                                                                                                           &gt;
-<em>cat    - concatenate files and print on the standard output.</em></p>
-</blockquote>
+### SOLUTION
 
-<blockquote>
-  <p><em>file   - determine file type.</em></p>
-</blockquote>
+View the files that are present in the current working directory using the `ls` command. Next move into the `inhere/` directory. This can be done using the `cd` command. 
 
-<blockquote>
-  <p><em>du     - estimate file space usage.</em></p>
-</blockquote>
+```bash
+bandit4@bandit:~$ ls
+inhere
 
-<blockquote>
-  <p><em>find   - search for files in a directory hierarchy.</em></p>
-</blockquote>
+bandit4@bandit:~$ cd inhere/
+```
+View files that are in the directory using the `ls` command.
 
-<h3 id="solution-1">SOLUTION</h3>
+```bash
+bandit4@bandit:~/inhere$ ls
+-file00  -file01  -file02  -file03  -file04  -file05  -file06  -file07  -file08  -file09
+```
+We know we have to find file who’s content is in Human Readable format. This check can be performed using the `file` command. File command returns the type of data that is found in the file. 
 
-<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+```bash
+bandit4@bandit:~/inhere$ file ./*
+./-file00: data
+./-file01: data
+./-file02: data
+./-file03: data
+./-file04: data
+./-file05: data
+./-file06: data
+./-file07: ASCII text
+./-file08: data
+./-file09: data
+```
+View the content of `-file07` file using the `cat` command.
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit1@bandit:~<span class="nv">$ </span><span class="nb">ls</span>
--
-</code></pre></div></div>
-<p>We can view the content of file named <code class="language-plaintext highlighter-rouge">-</code> using the <code class="language-plaintext highlighter-rouge">cat</code> command. <strong>NOTE:</strong> <code class="language-plaintext highlighter-rouge">-</code> in Linux refers to Standard Input/ Standard Output (STDIN/ STDOUT). So We have to use the concept of redirection or specify the absolute path to the file to access it.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit1@bandit:~<span class="nv">$ </span><span class="nb">cat</span> &lt; -
-CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
-bandit1@bandit:~<span class="nv">$ </span><span class="nb">cat</span> ./-
-CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
-</code></pre></div></div>
-<p>We have found the password for the next level !</p>
+```bash
+bandit4@bandit:~/inhere$ cat ./-file07
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+```
+We have found the password for the next level!
 
-<h2 id="level-2-to-level-3">Level 2 to Level 3</h2>
+## Level 5 to Level 6
 
-<h2 id="the-levels-statement-2">The Level’s statement</h2>
+### THE LEVEL'S STATEMENT
 
-<blockquote>
-  <p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">spaces in this filename</code> located in the home directory.</em></p>
-</blockquote>
+>*The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:*
+>
+> *- human-readable*
+> *- 1033 bytes in size*
+> *- not executable*
 
-<h3 id="commands-2">COMMANDS</h3>
+### COMMANDS
 
-<blockquote>
-  <p><em>ls     - list directory contents.</em></p>
-</blockquote>
+> *ls     - list directory contents.*
+                                                                                                                        
+> *cd     - change working directory.*
 
-<blockquote>
-  <p><em>cd     - change working directory.</em>
-                                                                                                                                                                           &gt;
-<em>cat    - concatenate files and print on the standard output.</em></p>
-</blockquote>
+> *cat    - concatenate files and print on the standard output.*
 
-<blockquote>
-  <p><em>file   - determine file type.</em></p>
-</blockquote>
+> *file   - determine file type.*
+                                                                                                                        
+> *du     - estimate file space usage.*
+                                                                                                                        
+> *find   - search for files in a directory hierarchy.*
 
-<blockquote>
-  <p><em>du     - estimate file space usage.</em></p>
-</blockquote>
+## SOLUTION
 
-<blockquote>
-  <p><em>find   - search for files in a directory hierarchy.</em></p>
-</blockquote>
+View files that are in the `inhere` directory.
 
-<h2 id="solution-2">SOLUTION</h2>
+```bash
+bandit5@bandit:~$ ls
+inhere
+bandit5@bandit:~$ cd inhere/
+bandit5@bandit:~/inhere$ ls
+maybehere00  maybehere03  maybehere06  maybehere09  maybehere12  maybehere15  maybehere18
+maybehere01  maybehere04  maybehere07  maybehere10  maybehere13  maybehere16  maybehere19
+maybehere02  maybehere05  maybehere08  maybehere11  maybehere14  maybehere17
 
-<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+```
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit2@bandit:~<span class="nv">$ </span><span class="nb">ls
-</span>spaces <span class="k">in </span>this filename
-</code></pre></div></div>
-<p>View the content of the file named spaces in this filename using the cat command. <strong>NOTE:</strong> The spaces in the name can be escaped using \ , another approach is to enclosing the filename in “” (quotes).</p>
+To search for the file that we require using the properties that are specified in the question we can make use of the `find` command.
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit2@bandit:~<span class="nv">$ </span><span class="nb">cat </span>spaces<span class="se">\ </span><span class="k">in</span><span class="se">\ </span>this<span class="se">\ </span>filename
-UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
-bandit2@bandit:~<span class="nv">$ </span><span class="nb">cat</span> <span class="s2">"spaces in this filename"</span>
-UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
-</code></pre></div></div>
-<p>We have found the password for the next level !</p>
+```bash
+bandit5@bandit:~/inhere$ find . -type f -size 1033c -not -executable -exec file {} + | grep ASCII
+./maybehere07/.file2: ASCII text, with very long lines
+```
+> ### Command Explanation
+> - . : Search the current working directory only
+> - -type f : Look for files only (Exclude Directories)
+> - -size 1033c : Look for files that are exactly 1033 bytes in size (Find uses “c” to represent bytes)
+> - -not -executable : Find only non executable files
+> - -exec file {} + : Execute the file command on all the results returns by find
+>
+> **NOTE:** {} is an placeholder for the location where the names of the files found by find is going to be substituted. The “+” sign is used to terminate the statemen. 
+
+From the previous level we know that file command will return value “ASCII Text” for human readable files. So by using grep we are filtering the output to only show results with that contain that string. 
+The pipe (|) operator is used to pass the output of one command as the input of another command. 
+Finally we print the content of the file.
+
+```bash
+cat ./maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+```
+We have found the password for the next level!
 
         
       </section>
@@ -512,11 +542,11 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
       
   <nav class="pagination">
     
-      <a href="/nmap-commands/" class="pagination--pager" title="Nmap cheatsheet
+      <a href="/bandit-3-to-6/" class="pagination--pager" title="Bandit from level 3 to level 6
 ">Previous</a>
     
     
-      <a href="/bandit-3-to-6/" class="pagination--pager" title="Bandit from level 3 to level 6
+      <a href="/bandit-6-to-9/" class="pagination--pager" title="Bandit from level 6 to level 9
 ">Next</a>
     
   </nav>

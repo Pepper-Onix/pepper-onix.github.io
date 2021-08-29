@@ -1,0 +1,648 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Bandit from level 6 to level 9 - PepperOnion’s Blog</title>
+<meta name="description" content="https://overthewire.org/wargames/bandit/">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="PepperOnion's Blog">
+<meta property="og:title" content="Bandit from level 6 to level 9">
+<meta property="og:url" content="http://localhost:4000/bandit-6-to-9/">
+
+
+  <meta property="og:description" content="https://overthewire.org/wargames/bandit/">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2021-08-29T00:00:00+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/bandit-6-to-9/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "PepperOnion",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="PepperOnion's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/masthead.png" alt=""></a>
+                
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/" >Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/" >Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+    
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="http://localhost:4000/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        <li class="current">Bandit from level 6 to level 9</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/avatar.png" alt="PepperOnion" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">PepperOnion</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Pentesting4fun
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:pentesting4free@gmail.com">
+            <meta itemprop="email" content="pentesting4free@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/albertsanuy" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Bandit from level 6 to level 9">
+    <meta itemprop="description" content="https://overthewire.org/wargames/bandit/">
+    <meta itemprop="datePublished" content="August 29, 2021">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Bandit from level 6 to level 9
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p class="page__meta">
+          
+            <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-08-29T00:00:00+02:00">August 29, 2021 </time>&emsp;
+          
+          
+        </p>
+        <h2 id="level-6-to-level-7">Level 6 to Level 7</h2>
+
+<h3 id="the-levels-statement">THE LEVEL’S STATEMENT</h3>
+
+<blockquote>
+  <p><em>The password for the next level is stored somewhere on the server and has all of the following properties:</em></p>
+
+  <p><em>- owned by user bandit7</em>
+<em>- owned by group bandit6</em>
+<em>- 33 bytes in size</em></p>
+</blockquote>
+
+<h3 id="commands">COMMANDS</h3>
+
+<blockquote>
+  <p><em>ls     - list directory contents.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>cd     - change working directory.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>cat    - concatenate files and print on the standard output.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>file   - determine file type.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>du     - estimate file space usage.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>find   - search for files in a directory hierarchy.</em></p>
+</blockquote>
+
+<h3 id="solution">SOLUTION</h3>
+
+<p>Since we don’t know where the file is we will have to search the entire server. We know some properties about the file that we can use to try and locate the file. Similar to the previous level we can use the <code class="language-plaintext highlighter-rouge">find</code> command for this task.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit6@bandit:~<span class="nv">$ </span>find / <span class="nt">-type</span> f <span class="nt">-user</span> bandit7 <span class="nt">-group</span> bandit6 <span class="nt">-size</span> 33c
+</code></pre></div></div>
+<blockquote>
+  <h3 id="command-explanation">Command explanation</h3>
+
+  <ul>
+    <li>/ : Search the entire server (/ is the root directory on Linux similar to the C:/ Drive on Windows)</li>
+    <li>-type f : Search only for files (Exclude Directories)</li>
+    <li>-user bandit7 : Search for files which are owned by user bandit7</li>
+    <li>-group bandit6 : Search for files that belongs to the group bandit6</li>
+    <li>-size 33c : Look for files that are exactly 33 bytes in size (Find uses “c” to represent size in bytes)</li>
+  </ul>
+</blockquote>
+
+<p>This command alone is sufficient to get the result that we are looking for but since we are scanning the entire server we are going to encounter files what we do not have permission to access and which are going to show errors.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit6@bandit:~<span class="nv">$ </span>find / <span class="nt">-type</span> f <span class="nt">-user</span> bandit7 <span class="nt">-group</span> bandit6 <span class="nt">-size</span> 33c
+find: ‘/root’: Permission denied
+find: ‘/home/bandit28-git’: Permission denied
+find: ‘/home/bandit30-git’: Permission denied
+find: ‘/home/bandit5/inhere’: Permission denied
+find: ‘/home/bandit27-git’: Permission denied
+find: ‘/home/bandit29-git’: Permission denied
+find: ‘/home/bandit31-git’: Permission denied
+find: ‘/lost+found’: Permission denied
+find: ‘/etc/ssl/private’: Permission denied
+find: ‘/etc/polkit-1/localauthority’: Permission denied
+find: ‘/etc/lvm/archive’: Permission denied
+find: ‘/etc/lvm/backup’: Permission denied
+find: ‘/sys/fs/pstore’: Permission denied
+</code></pre></div></div>
+<p>These errors can be filtered out by sending the error stream (denoted by number 2) to <code class="language-plaintext highlighter-rouge">/dev/null</code>. NULL is a special device on Linux which destroys all the data that is send to it.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit6@bandit:~<span class="nv">$ </span>find / <span class="nt">-type</span> f <span class="nt">-user</span> bandit7 <span class="nt">-group</span> bandit6 <span class="nt">-size</span> 33c 2&gt; /dev/null
+/var/lib/dpkg/info/bandit7.password
+</code></pre></div></div>
+<p>We only get one file, so let’s view its content.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit6@bandit:~<span class="nv">$ </span><span class="nb">cat</span> /var/lib/dpkg/info/bandit7.password
+HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+</code></pre></div></div>
+<p>Here we get the password.</p>
+
+<h2 id="level-7-to-level-8">Level 7 to Level 8</h2>
+
+<h3 id="the-levels-statement-1">THE LEVEL’S STATEMENT</h3>
+
+<blockquote>
+  <p>*The password for the next level is stored in the file data.txt next to the word millionth. *</p>
+</blockquote>
+
+<h3 id="commands-1">COMMANDS</h3>
+
+<blockquote>
+  <p><em>grep             - print lines that match patterns.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>sort             - sort lines of text files.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>uniq             - report or omit repeated lines.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>strings          - print the sequences of printable characters in files.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>base64           - base64 encode/decode data and print to standard output.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>tr               - translate or delete characters.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>tar              - an archiving utility.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>gzip             - compress or expand files.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>bzip2            - a block-sorting file compressor, v1.0.8.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>xxd              - make a hexdump or do the reverse.</em></p>
+</blockquote>
+
+<h3 id="solution-1">SOLUTION</h3>
+
+<p>Peek at the data that is present in the file. This can be achieved using the <code class="language-plaintext highlighter-rouge">head</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit7@bandit:~<span class="nv">$ </span><span class="nb">head</span> <span class="nt">-n</span> 10 data.txt 
+binning WnfnFPqkuhl2nwHBohzn2C4L5W0gwcLq
+abuts v8PAwDdkGDdp5NsJ7ZFM5A7TJ5MkYDbm
+fathead wBhCy0fqvbQdexz5kMKBtGoSWgXw7s0H
+attacks 3GzwnGiZnBDdVuHivJk1pEfOOYu7uOTa
+lopping H9hzviFp1QO4WF8EzcQNl5MDz5r1bzUC
+tyrannosaurus WxtYXVar4sgInHp7YUpTzOjdUw1Ww0x8
+reservists QDidoX6BN1MDTi0QwA6Vt82L9Rb64cm3
+atrophy<span class="s1">'s mSpCwP9VgcGRn1SCD8R9bb9cPBl2yqkW
+bolt'</span>s 726RB3lt2RmeCtbWEQ8lhUAxVBJfepy0
+Klondikes wVh3ILxQAsKg8WNnFHp8GxtnSu213GbR
+</code></pre></div></div>
+<p>(The -n flag allows us to specify how many lines to print from start of the file. We can use the <code class="language-plaintext highlighter-rouge">tail</code> command to look at the last n lines of a file).</p>
+
+<p>We know the password is next to the word “millionth” in the file. We can look for this pattern by using the <code class="language-plaintext highlighter-rouge">grep</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit7@bandit:~<span class="nv">$ </span><span class="nb">grep </span>millionth data.txt 
+millionth cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+</code></pre></div></div>
+
+<h2 id="level-8-to-level-9">Level 8 to Level 9</h2>
+
+<h3 id="the-levels-statement-2">THE LEVEL’S STATEMENT</h3>
+
+<blockquote>
+  <p><em>The password for the next level is stored in the file data.txt and is the only line of text that occurs only once.</em></p>
+</blockquote>
+
+<h3 id="commands-2">COMMANDS</h3>
+
+<blockquote>
+  <p><em>grep             - print lines that match patterns.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>sort             - sort lines of text files.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>uniq             - report or omit repeated lines.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>strings          - print the sequences of printable characters in files.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>base64           - base64 encode/decode data and print to standard output.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>tr               - translate or delete characters.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>tar              - an archiving utility.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>gzip             - compress or expand files.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>bzip2            - a block-sorting file compressor, v1.0.8.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>xxd              - make a hexdump or do the reverse.</em></p>
+</blockquote>
+
+<h2 id="solution-2">SOLUTION</h2>
+
+<p>Peek at the data that is present in the file. This can be achieved using the <code class="language-plaintext highlighter-rouge">head</code>.</p>
+
+<p>Since we know there are repeating lines in the file, we can use <code class="language-plaintext highlighter-rouge">uniq</code> with the <code class="language-plaintext highlighter-rouge">-u</code> flag to print the unique line. Uniq command expects the repeating (similar) lines to be next to each other (adjacent) so we need to sort our data before we can find the unique line.</p>
+
+<p>For sorting we can use <code class="language-plaintext highlighter-rouge">sort</code> which will sort the data in the file line wise. Finally we can combine all these commands together into an one liner using the <code class="language-plaintext highlighter-rouge">|</code> (pipe) operator.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit8@bandit:~<span class="nv">$ </span><span class="nb">cat </span>data.txt | <span class="nb">sort</span> | <span class="nb">uniq</span> <span class="nt">-u</span>
+UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#bandit" class="page__taxonomy-item" rel="tag">bandit</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#overthewire" class="page__taxonomy-item" rel="tag">OverTheWire</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-08-29T00:00:00+02:00">August 29, 2021</time></p>
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/bandit-3-to-6.md/" class="pagination--pager" title="Bandit from 3 to 6
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+</div>
+
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 PepperOnion</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script data-search-pseudo-elements defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

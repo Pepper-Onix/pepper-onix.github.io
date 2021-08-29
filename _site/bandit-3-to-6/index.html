@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Bandit from 3 to 6 - PepperOnion’s Blog</title>
+<!-- begin _includes/seo.html --><title>Bandit from level 3 to level 6 - PepperOnion’s Blog</title>
 <meta name="description" content="https://overthewire.org/wargames/bandit/">
 
 
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="PepperOnion's Blog">
-<meta property="og:title" content="Bandit from 3 to 6">
+<meta property="og:title" content="Bandit from level 3 to level 6">
 <meta property="og:url" content="http://localhost:4000/bandit-3-to-6/">
 
 
@@ -166,7 +166,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Bandit from 3 to 6</li>
+        <li class="current">Bandit from level 3 to level 6</li>
       
     
   </ol>
@@ -294,7 +294,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Bandit from 3 to 6">
+    <meta itemprop="headline" content="Bandit from level 3 to level 6">
     <meta itemprop="description" content="https://overthewire.org/wargames/bandit/">
     <meta itemprop="datePublished" content="August 24, 2021">
     
@@ -302,7 +302,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Bandit from 3 to 6
+          <h1 id="page-title" class="page__title" itemprop="headline">Bandit from level 3 to level 6
 </h1>
           
         </header>
@@ -321,30 +321,34 @@
 <h3 id="the-levels-statement">THE LEVEL’S STATEMENT</h3>
 
 <blockquote>
-  <p>The password for the next level is stored in a hidden file in the inhere directory.</p>
+  <p><em>The password for the next level is stored in a hidden file in the inhere directory.</em></p>
 </blockquote>
 
 <h3 id="commands">COMMANDS</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; whatis ls                                                                         
-ls (1)          - list directory contents
-                                                                                                                        
-&gt; whatis cd
-cd  (1)         - change working directory
-                                                                                                                        
-&gt; whatis cat                                                                                                     
-cat (1)         - concatenate files and print on the standard output
-                                                                                                                        
-&gt; whatis file
-file (1)        - determine file type
-                                                                                                                        
-&gt; whatis du  
-du (1)          - estimate file space usage
-                                                                                                                        
-&gt; whatis find
-find (1)        - search for files in a directory hierarchy
+<blockquote>
+  <p><em>ls     - list directory contents.</em></p>
+</blockquote>
 
-</code></pre></div></div>
+<blockquote>
+  <p><em>cd     - change working directory.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>cat    - concatenate files and print on the standard output.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>file   - determine file type.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>du     - estimate file space usage.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>find   - search for files in a directory hierarchy.</em></p>
+</blockquote>
 
 <h3 id="solution">SOLUTION</h3>
 
@@ -366,66 +370,49 @@ find (1)        - search for files in a directory hierarchy
 </code></pre></div></div>
 <p>View the content of <code class="language-plaintext highlighter-rouge">.hidden</code> file using the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
 
-<p>```bashCommand Explanation
-. : Search the current working directory only
--type f : Look for files only (Exclude Directories)
--size 1033c : Look for files that are exactly 1033 bytes in size (Find uses “c” to represent bytes)
--not -executable : Find only non executable files
--exec file {} + : Execute the file command on all the results returns by find
-bandit3@bandit:~/inhere$ cat .hidden
-pIwrPrtPN36QITSp3EQaw936yaFoFgAB</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>We have found the password for the next level!
+<p>We have found the password for the next level!</p>
 
+<h2 id="level-4-to-level-5">Level 4 to Level 5</h2>
 
-## Level 4 to Level 5
+<h3 id="the-levels-statement-1">THE LEVEL’S STATEMENT</h3>
 
-### THE LEVEL'S STATEMENT
-
-&gt;The password for the next level is stored in the only human-readable file in the inhere directory.
-&gt;Tip: if your terminal is messed up, try the “reset” command.
-
-### COMMANDS
-
-</code></pre></div></div>
 <blockquote>
-  <p>whatis ls                                                                       <br />
-ls (1)          - list directory contents</p>
+  <p><em>The password for the next level is stored in the only human-readable file in the inhere directory.</em>
+<em>Tip: if your terminal is messed up, try the “reset” command.</em></p>
+</blockquote>
+
+<h3 id="commands-1">COMMANDS</h3>
+
+<blockquote>
+  <p><em>ls     - list directory contents.</em></p>
 </blockquote>
 
 <blockquote>
-  <p>whatis cd
-cd  (1)         - change working directory</p>
+  <p><em>cd     - change working directory.</em>
+                                                                                                                                                                           &gt;
+<em>cat    - concatenate files and print on the standard output.</em></p>
 </blockquote>
 
 <blockquote>
-  <p>whatis cat                                                                                                   <br />
-cat (1)         - concatenate files and print on the standard output</p>
+  <p><em>file   - determine file type.</em></p>
 </blockquote>
 
 <blockquote>
-  <p>whatis file
-file (1)        - determine file type</p>
+  <p><em>du     - estimate file space usage.</em></p>
 </blockquote>
 
 <blockquote>
-  <p>whatis du<br />
-du (1)          - estimate file space usage</p>
+  <p><em>find   - search for files in a directory hierarchy.</em></p>
 </blockquote>
 
-<blockquote>
-  <p>whatis find
-find (1)        - search for files in a directory hierarchy</p>
-</blockquote>
+<h3 id="solution-1">SOLUTION</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>### SOLUTION
+<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command. Next move into the <code class="language-plaintext highlighter-rouge">inhere/</code> directory. This can be done using the <code class="language-plaintext highlighter-rouge">cd</code> command.</p>
 
-View the files that are present in the current working directory using the `ls` command. Next move into the `inhere/` directory. This can be done using the `cd` command. 
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit4@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>inhere
 
-```bash
-bandit4@bandit:~$ ls
-inhere
-
-bandit4@bandit:~$ cd inhere/
+bandit4@bandit:~<span class="nv">$ </span><span class="nb">cd </span>inhere/
 </code></pre></div></div>
 <p>View files that are in the directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
 
@@ -455,41 +442,41 @@ koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 
 <h2 id="level-5-to-level-6">Level 5 to Level 6</h2>
 
-<h3 id="the-levels-statement-1">THE LEVEL’S STATEMENT</h3>
+<h3 id="the-levels-statement-2">THE LEVEL’S STATEMENT</h3>
 
 <blockquote>
-  <p>The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:</p>
+  <p><em>The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:</em></p>
 
-  <ul>
-    <li>human-readable</li>
-    <li>1033 bytes in size</li>
-    <li>not executable</li>
-  </ul>
+  <p><em>- human-readable</em>
+<em>- 1033 bytes in size</em>
+<em>- not executable</em></p>
 </blockquote>
 
-<h3 id="commands-1">COMMANDS</h3>
+<h3 id="commands-2">COMMANDS</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; whatis ls                                                                         
-ls (1)          - list directory contents
-                                                                                                                        
-&gt; whatis cd
-cd  (1)         - change working directory
-                                                                                                                        
-&gt; whatis cat                                                                                                     
-cat (1)         - concatenate files and print on the standard output
-                                                                                                                        
-&gt; whatis file
-file (1)        - determine file type
-                                                                                                                        
-&gt; whatis du  
-du (1)          - estimate file space usage
-                                                                                                                        
-&gt; whatis find
-find (1)        - search for files in a directory hierarchy
+<blockquote>
+  <p><em>ls     - list directory contents.</em></p>
+</blockquote>
 
-</code></pre></div></div>
+<blockquote>
+  <p><em>cd     - change working directory.</em>
+                                                                                                                                                                           &gt;
+<em>cat    - concatenate files and print on the standard output.</em></p>
+</blockquote>
 
-<h2 id="solution-1">SOLUTION</h2>
+<blockquote>
+  <p><em>file   - determine file type.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>du     - estimate file space usage.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>find   - search for files in a directory hierarchy.</em></p>
+</blockquote>
+
+<h2 id="solution-2">SOLUTION</h2>
 
 <p>View files that are in the <code class="language-plaintext highlighter-rouge">inhere</code> directory.</p>
 
@@ -509,7 +496,7 @@ maybehere02  maybehere05  maybehere08  maybehere11  maybehere14  maybehere17
 ./maybehere07/.file2: ASCII text, with very long lines
 </code></pre></div></div>
 <blockquote>
-  <h2 id="command-explanation">Command Explanation</h2>
+  <h3 id="command-explanation">Command Explanation</h3>
   <ul>
     <li>. : Search the current working directory only</li>
     <li>-type f : Look for files only (Exclude Directories)</li>
@@ -586,11 +573,12 @@ DXjZPULLxYr17uwoI01bNLQbtFemEgo7
       
   <nav class="pagination">
     
-      <a href="/bandit-0-to-3/" class="pagination--pager" title="Bandit from 0 to 3
+      <a href="/bandit-0-to-3/" class="pagination--pager" title="Bandit from level 0 to level 3
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/bandit-3-to-6.md/" class="pagination--pager" title="Bandit from 3 to 6
+">Next</a>
     
   </nav>
 

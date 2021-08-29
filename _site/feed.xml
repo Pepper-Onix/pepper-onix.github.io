@@ -1,4 +1,223 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-08-25T13:20:53+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">PepperOnion’s Blog</title><subtitle>PepperOnion's personal blog. Security and Linux stuff.</subtitle><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><entry><title type="html">Bandit from 0 to 3</title><link href="http://localhost:4000/bandit-0-to-3/" rel="alternate" type="text/html" title="Bandit from 0 to 3" /><published>2021-08-24T00:00:00+02:00</published><updated>2021-08-24T00:00:00+02:00</updated><id>http://localhost:4000/bandit-0-to-3</id><content type="html" xml:base="http://localhost:4000/bandit-0-to-3/">&lt;h2 id=&quot;level-0-to-level-1&quot;&gt;Level 0 to Level 1&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-08-29T20:15:19+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">PepperOnion’s Blog</title><subtitle>PepperOnion's personal blog. Security and Linux stuff.</subtitle><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><entry><title type="html">Bandit from level 6 to level 9</title><link href="http://localhost:4000/bandit-6-to-9/" rel="alternate" type="text/html" title="Bandit from level 6 to level 9" /><published>2021-08-29T00:00:00+02:00</published><updated>2021-08-29T00:00:00+02:00</updated><id>http://localhost:4000/bandit-6-to-9</id><content type="html" xml:base="http://localhost:4000/bandit-6-to-9/">&lt;h2 id=&quot;level-6-to-level-7&quot;&gt;Level 6 to Level 7&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;The password for the next level is stored somewhere on the server and has all of the following properties:&lt;/em&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;em&gt;- owned by user bandit7&lt;/em&gt;
+&lt;em&gt;- owned by group bandit6&lt;/em&gt;
+&lt;em&gt;- 33 bytes in size&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands&quot;&gt;COMMANDS&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;solution&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;Since we don’t know where the file is we will have to search the entire server. We know some properties about the file that we can use to try and locate the file. Similar to the previous level we can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt; command for this task.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit6@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find / &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f &lt;span class=&quot;nt&quot;&gt;-user&lt;/span&gt; bandit7 &lt;span class=&quot;nt&quot;&gt;-group&lt;/span&gt; bandit6 &lt;span class=&quot;nt&quot;&gt;-size&lt;/span&gt; 33c
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;command-explanation&quot;&gt;Command explanation&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;/ : Search the entire server (/ is the root directory on Linux similar to the C:/ Drive on Windows)&lt;/li&gt;
+    &lt;li&gt;-type f : Search only for files (Exclude Directories)&lt;/li&gt;
+    &lt;li&gt;-user bandit7 : Search for files which are owned by user bandit7&lt;/li&gt;
+    &lt;li&gt;-group bandit6 : Search for files that belongs to the group bandit6&lt;/li&gt;
+    &lt;li&gt;-size 33c : Look for files that are exactly 33 bytes in size (Find uses “c” to represent size in bytes)&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This command alone is sufficient to get the result that we are looking for but since we are scanning the entire server we are going to encounter files what we do not have permission to access and which are going to show errors.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit6@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find / &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f &lt;span class=&quot;nt&quot;&gt;-user&lt;/span&gt; bandit7 &lt;span class=&quot;nt&quot;&gt;-group&lt;/span&gt; bandit6 &lt;span class=&quot;nt&quot;&gt;-size&lt;/span&gt; 33c
+find: ‘/root’: Permission denied
+find: ‘/home/bandit28-git’: Permission denied
+find: ‘/home/bandit30-git’: Permission denied
+find: ‘/home/bandit5/inhere’: Permission denied
+find: ‘/home/bandit27-git’: Permission denied
+find: ‘/home/bandit29-git’: Permission denied
+find: ‘/home/bandit31-git’: Permission denied
+find: ‘/lost+found’: Permission denied
+find: ‘/etc/ssl/private’: Permission denied
+find: ‘/etc/polkit-1/localauthority’: Permission denied
+find: ‘/etc/lvm/archive’: Permission denied
+find: ‘/etc/lvm/backup’: Permission denied
+find: ‘/sys/fs/pstore’: Permission denied
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;These errors can be filtered out by sending the error stream (denoted by number 2) to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/null&lt;/code&gt;. NULL is a special device on Linux which destroys all the data that is send to it.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit6@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find / &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f &lt;span class=&quot;nt&quot;&gt;-user&lt;/span&gt; bandit7 &lt;span class=&quot;nt&quot;&gt;-group&lt;/span&gt; bandit6 &lt;span class=&quot;nt&quot;&gt;-size&lt;/span&gt; 33c 2&amp;gt; /dev/null
+/var/lib/dpkg/info/bandit7.password
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We only get one file, so let’s view its content.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit6@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /var/lib/dpkg/info/bandit7.password
+HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Here we get the password.&lt;/p&gt;
+
+&lt;h2 id=&quot;level-7-to-level-8&quot;&gt;Level 7 to Level 8&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-1&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;*The password for the next level is stored in the file data.txt next to the word millionth. *&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-1&quot;&gt;COMMANDS&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;grep             - print lines that match patterns.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;sort             - sort lines of text files.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;uniq             - report or omit repeated lines.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;strings          - print the sequences of printable characters in files.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;base64           - base64 encode/decode data and print to standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;tr               - translate or delete characters.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;tar              - an archiving utility.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;gzip             - compress or expand files.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;bzip2            - a block-sorting file compressor, v1.0.8.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;xxd              - make a hexdump or do the reverse.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;solution-1&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;Peek at the data that is present in the file. This can be achieved using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;head&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit7@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10 data.txt 
+binning WnfnFPqkuhl2nwHBohzn2C4L5W0gwcLq
+abuts v8PAwDdkGDdp5NsJ7ZFM5A7TJ5MkYDbm
+fathead wBhCy0fqvbQdexz5kMKBtGoSWgXw7s0H
+attacks 3GzwnGiZnBDdVuHivJk1pEfOOYu7uOTa
+lopping H9hzviFp1QO4WF8EzcQNl5MDz5r1bzUC
+tyrannosaurus WxtYXVar4sgInHp7YUpTzOjdUw1Ww0x8
+reservists QDidoX6BN1MDTi0QwA6Vt82L9Rb64cm3
+atrophy&lt;span class=&quot;s1&quot;&gt;'s mSpCwP9VgcGRn1SCD8R9bb9cPBl2yqkW
+bolt'&lt;/span&gt;s 726RB3lt2RmeCtbWEQ8lhUAxVBJfepy0
+Klondikes wVh3ILxQAsKg8WNnFHp8GxtnSu213GbR
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;(The -n flag allows us to specify how many lines to print from start of the file. We can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail&lt;/code&gt; command to look at the last n lines of a file).&lt;/p&gt;
+
+&lt;p&gt;We know the password is next to the word “millionth” in the file. We can look for this pattern by using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit7@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;millionth data.txt 
+millionth cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;level-8-to-level-9&quot;&gt;Level 8 to Level 9&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-2&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;The password for the next level is stored in the file data.txt and is the only line of text that occurs only once.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-2&quot;&gt;COMMANDS&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;grep             - print lines that match patterns.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;sort             - sort lines of text files.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;uniq             - report or omit repeated lines.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;strings          - print the sequences of printable characters in files.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;base64           - base64 encode/decode data and print to standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;tr               - translate or delete characters.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;tar              - an archiving utility.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;gzip             - compress or expand files.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;bzip2            - a block-sorting file compressor, v1.0.8.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;xxd              - make a hexdump or do the reverse.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;solution-2&quot;&gt;SOLUTION&lt;/h2&gt;
+
+&lt;p&gt;Peek at the data that is present in the file. This can be achieved using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;head&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Since we know there are repeating lines in the file, we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;uniq&lt;/code&gt; with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-u&lt;/code&gt; flag to print the unique line. Uniq command expects the repeating (similar) lines to be next to each other (adjacent) so we need to sort our data before we can find the unique line.&lt;/p&gt;
+
+&lt;p&gt;For sorting we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sort&lt;/code&gt; which will sort the data in the file line wise. Finally we can combine all these commands together into an one liner using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt; (pipe) operator.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit8@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;data.txt | &lt;span class=&quot;nb&quot;&gt;sort&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;uniq&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt;
+UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit from level 0 to level 3</title><link href="http://localhost:4000/bandit-0-to-3/" rel="alternate" type="text/html" title="Bandit from level 0 to level 3" /><published>2021-08-24T00:00:00+02:00</published><updated>2021-08-24T00:00:00+02:00</updated><id>http://localhost:4000/bandit-0-to-3</id><content type="html" xml:base="http://localhost:4000/bandit-0-to-3/">&lt;h2 id=&quot;level-0-to-level-1&quot;&gt;Level 0 to Level 1&lt;/h2&gt;
 
 &lt;h3 id=&quot;the-levels-statement&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -6,25 +225,28 @@
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;commands&quot;&gt;COMMANDS&lt;/h3&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; whatis ls                                                                         
-ls (1)          - list directory contents
-                                                                                                                        
-&amp;gt; whatis cd
-cd  (1)         - change working directory
-                                                                                                                        
-&amp;gt; whatis cat                                                                                                     
-cat (1)         - concatenate files and print on the standard output
-                                                                                                                        
-&amp;gt; whatis file
-file (1)        - determine file type
-                                                                                                                        
-&amp;gt; whatis du  
-du (1)          - estimate file space usage
-                                                                                                                        
-&amp;gt; whatis find
-find (1)        - search for files in a directory hierarchy
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;
+                                                                                                                                                                           &amp;gt;
+&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;solution&quot;&gt;SOLUTION&lt;/h3&gt;
 
@@ -49,25 +271,29 @@ boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;commands-1&quot;&gt;COMMANDS&lt;/h3&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; whatis ls                                                                         
-ls (1)          - list directory contents
-                                                                                                                        
-&amp;gt; whatis cd
-cd  (1)         - change working directory
-                                                                                                                        
-&amp;gt; whatis cat                                                                                                     
-cat (1)         - concatenate files and print on the standard output
-                                                                                                                        
-&amp;gt; whatis file
-file (1)        - determine file type
-                                                                                                                        
-&amp;gt; whatis du  
-du (1)          - estimate file space usage
-                                                                                                                        
-&amp;gt; whatis find
-find (1)        - search for files in a directory hierarchy
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;
+                                                                                                                                                                           &amp;gt;
+&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;h3 id=&quot;solution-1&quot;&gt;SOLUTION&lt;/h3&gt;
 
 &lt;p&gt;View the files that are present in the current working directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command.&lt;/p&gt;
@@ -88,29 +314,32 @@ CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 &lt;h2 id=&quot;the-levels-statement-2&quot;&gt;The Level’s statement&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;The password for the next level is stored in a file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spaces in this filename&lt;/code&gt; located in the home directory.&lt;/p&gt;
+  &lt;p&gt;&lt;em&gt;The password for the next level is stored in a file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spaces in this filename&lt;/code&gt; located in the home directory.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;commands-2&quot;&gt;COMMANDS&lt;/h3&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; whatis ls                                                                         
-ls (1)          - list directory contents
-                                                                                                                        
-&amp;gt; whatis cd
-cd  (1)         - change working directory
-                                                                                                                        
-&amp;gt; whatis cat                                                                                                     
-cat (1)         - concatenate files and print on the standard output
-                                                                                                                        
-&amp;gt; whatis file
-file (1)        - determine file type
-                                                                                                                        
-&amp;gt; whatis du  
-du (1)          - estimate file space usage
-                                                                                                                        
-&amp;gt; whatis find
-find (1)        - search for files in a directory hierarchy
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;
+                                                                                                                                                                           &amp;gt;
+&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h2 id=&quot;solution-2&quot;&gt;SOLUTION&lt;/h2&gt;
 
@@ -126,35 +355,39 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 bandit2@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;spaces in this filename&quot;&lt;/span&gt;
 UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;We have found the password for the next level !&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit from 3 to 6</title><link href="http://localhost:4000/bandit-3-to-6/" rel="alternate" type="text/html" title="Bandit from 3 to 6" /><published>2021-08-24T00:00:00+02:00</published><updated>2021-08-24T00:00:00+02:00</updated><id>http://localhost:4000/bandit-3-to-6</id><content type="html" xml:base="http://localhost:4000/bandit-3-to-6/">&lt;h2 id=&quot;level-3-to-level-4&quot;&gt;Level 3 to Level 4&lt;/h2&gt;
+&lt;p&gt;We have found the password for the next level !&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit from level 3 to level 6</title><link href="http://localhost:4000/bandit-3-to-6/" rel="alternate" type="text/html" title="Bandit from level 3 to level 6" /><published>2021-08-24T00:00:00+02:00</published><updated>2021-08-24T00:00:00+02:00</updated><id>http://localhost:4000/bandit-3-to-6</id><content type="html" xml:base="http://localhost:4000/bandit-3-to-6/">&lt;h2 id=&quot;level-3-to-level-4&quot;&gt;Level 3 to Level 4&lt;/h2&gt;
 
 &lt;h3 id=&quot;the-levels-statement&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;The password for the next level is stored in a hidden file in the inhere directory.&lt;/p&gt;
+  &lt;p&gt;&lt;em&gt;The password for the next level is stored in a hidden file in the inhere directory.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;commands&quot;&gt;COMMANDS&lt;/h3&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; whatis ls                                                                         
-ls (1)          - list directory contents
-                                                                                                                        
-&amp;gt; whatis cd
-cd  (1)         - change working directory
-                                                                                                                        
-&amp;gt; whatis cat                                                                                                     
-cat (1)         - concatenate files and print on the standard output
-                                                                                                                        
-&amp;gt; whatis file
-file (1)        - determine file type
-                                                                                                                        
-&amp;gt; whatis du  
-du (1)          - estimate file space usage
-                                                                                                                        
-&amp;gt; whatis find
-find (1)        - search for files in a directory hierarchy
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;solution&quot;&gt;SOLUTION&lt;/h3&gt;
 
@@ -176,66 +409,49 @@ find (1)        - search for files in a directory hierarchy
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;View the content of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.hidden&lt;/code&gt; file using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; command.&lt;/p&gt;
 
-&lt;p&gt;```bashCommand Explanation
-. : Search the current working directory only
--type f : Look for files only (Exclude Directories)
--size 1033c : Look for files that are exactly 1033 bytes in size (Find uses “c” to represent bytes)
--not -executable : Find only non executable files
--exec file {} + : Execute the file command on all the results returns by find
-bandit3@bandit:~/inhere$ cat .hidden
-pIwrPrtPN36QITSp3EQaw936yaFoFgAB&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;We have found the password for the next level!
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;
 
+&lt;h2 id=&quot;level-4-to-level-5&quot;&gt;Level 4 to Level 5&lt;/h2&gt;
 
-## Level 4 to Level 5
+&lt;h3 id=&quot;the-levels-statement-1&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
 
-### THE LEVEL'S STATEMENT
-
-&amp;gt;The password for the next level is stored in the only human-readable file in the inhere directory.
-&amp;gt;Tip: if your terminal is messed up, try the “reset” command.
-
-### COMMANDS
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;whatis ls                                                                       &lt;br /&gt;
-ls (1)          - list directory contents&lt;/p&gt;
+  &lt;p&gt;&lt;em&gt;The password for the next level is stored in the only human-readable file in the inhere directory.&lt;/em&gt;
+&lt;em&gt;Tip: if your terminal is messed up, try the “reset” command.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-1&quot;&gt;COMMANDS&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;whatis cd
-cd  (1)         - change working directory&lt;/p&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;
+                                                                                                                                                                           &amp;gt;
+&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;whatis cat                                                                                                   &lt;br /&gt;
-cat (1)         - concatenate files and print on the standard output&lt;/p&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;whatis file
-file (1)        - determine file type&lt;/p&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;whatis du&lt;br /&gt;
-du (1)          - estimate file space usage&lt;/p&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;whatis find
-find (1)        - search for files in a directory hierarchy&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;h3 id=&quot;solution-1&quot;&gt;SOLUTION&lt;/h3&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;### SOLUTION
+&lt;p&gt;View the files that are present in the current working directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command. Next move into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inhere/&lt;/code&gt; directory. This can be done using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt; command.&lt;/p&gt;
 
-View the files that are present in the current working directory using the `ls` command. Next move into the `inhere/` directory. This can be done using the `cd` command. 
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit4@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;inhere
 
-```bash
-bandit4@bandit:~$ ls
-inhere
-
-bandit4@bandit:~$ cd inhere/
+bandit4@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;inhere/
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;View files that are in the directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command.&lt;/p&gt;
 
@@ -265,41 +481,41 @@ koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 
 &lt;h2 id=&quot;level-5-to-level-6&quot;&gt;Level 5 to Level 6&lt;/h2&gt;
 
-&lt;h3 id=&quot;the-levels-statement-1&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+&lt;h3 id=&quot;the-levels-statement-2&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:&lt;/p&gt;
+  &lt;p&gt;&lt;em&gt;The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:&lt;/em&gt;&lt;/p&gt;
 
-  &lt;ul&gt;
-    &lt;li&gt;human-readable&lt;/li&gt;
-    &lt;li&gt;1033 bytes in size&lt;/li&gt;
-    &lt;li&gt;not executable&lt;/li&gt;
-  &lt;/ul&gt;
+  &lt;p&gt;&lt;em&gt;- human-readable&lt;/em&gt;
+&lt;em&gt;- 1033 bytes in size&lt;/em&gt;
+&lt;em&gt;- not executable&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;commands-1&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;h3 id=&quot;commands-2&quot;&gt;COMMANDS&lt;/h3&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; whatis ls                                                                         
-ls (1)          - list directory contents
-                                                                                                                        
-&amp;gt; whatis cd
-cd  (1)         - change working directory
-                                                                                                                        
-&amp;gt; whatis cat                                                                                                     
-cat (1)         - concatenate files and print on the standard output
-                                                                                                                        
-&amp;gt; whatis file
-file (1)        - determine file type
-                                                                                                                        
-&amp;gt; whatis du  
-du (1)          - estimate file space usage
-                                                                                                                        
-&amp;gt; whatis find
-find (1)        - search for files in a directory hierarchy
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;
+                                                                                                                                                                           &amp;gt;
+&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2 id=&quot;solution-1&quot;&gt;SOLUTION&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;solution-2&quot;&gt;SOLUTION&lt;/h2&gt;
 
 &lt;p&gt;View files that are in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inhere&lt;/code&gt; directory.&lt;/p&gt;
 
@@ -319,7 +535,7 @@ maybehere02  maybehere05  maybehere08  maybehere11  maybehere14  maybehere17
 ./maybehere07/.file2: ASCII text, with very long lines
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;blockquote&gt;
-  &lt;h2 id=&quot;command-explanation&quot;&gt;Command Explanation&lt;/h2&gt;
+  &lt;h3 id=&quot;command-explanation&quot;&gt;Command Explanation&lt;/h3&gt;
   &lt;ul&gt;
     &lt;li&gt;. : Search the current working directory only&lt;/li&gt;
     &lt;li&gt;-type f : Look for files only (Exclude Directories)&lt;/li&gt;
@@ -338,7 +554,175 @@ Finally we print the content of the file.&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; ./maybehere07/.file2
 DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;We have found the password for the next level!&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Nmap cheatsheet</title><link href="http://localhost:4000/nmap-commands/" rel="alternate" type="text/html" title="Nmap cheatsheet" /><published>2021-08-19T00:00:00+02:00</published><updated>2021-08-19T00:00:00+02:00</updated><id>http://localhost:4000/nmap-commands</id><content type="html" xml:base="http://localhost:4000/nmap-commands/">&lt;h2 id=&quot;scan-techniques&quot;&gt;Scan techniques&lt;/h2&gt;
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit from 3 to 6</title><link href="http://localhost:4000/bandit-3-to-6.md/" rel="alternate" type="text/html" title="Bandit from 3 to 6" /><published>2021-08-24T00:00:00+02:00</published><updated>2021-08-24T00:00:00+02:00</updated><id>http://localhost:4000/bandit-3-to-6.md</id><content type="html" xml:base="http://localhost:4000/bandit-3-to-6.md/">## Level 3 to Level 4
+
+### THE LEVEL'S STATEMENT
+
+&gt;The password for the next level is stored in a hidden file in the inhere directory.
+
+### COMMANDS
+
+&gt; *ls     - list directory contents.*
+                                                                                                                        
+&gt; *cd     - change working directory.*
+                                                                                                                                                                           &gt;
+&gt; *cat    - concatenate files and print on the standard output.*
+                                                                                                                       
+&gt; *file   - determine file type.*
+                                                                                                                        
+&gt; *du     - estimate file space usage.*
+                                                                                                                        
+&gt; *find   - search for files in a directory hierarchy.*
+
+### SOLUTION
+
+View the files that are present in the current working directory using the `ls` command.
+
+```bash
+bandit3@bandit:~$ ls
+inhere
+```
+Move into the `inhere/` directory. This can be done using the `cd` command
+
+```bash
+bandit3@bandit:~$ cd inhere/
+```
+View files that are in the directory using the `ls` command. Since we know the file is hidden we have to use the `-a` flag to view hidden files.
+
+```bash
+bandit3@bandit:~/inhere$ ls -a
+.
+..
+.hidden
+```
+View the content of `.hidden` file using the `cat` command.
+
+We have found the password for the next level!
+
+
+## Level 4 to Level 5
+
+### THE LEVEL'S STATEMENT
+
+&gt;*The password for the next level is stored in the only human-readable file in the inhere directory.*
+&gt;*Tip: if your terminal is messed up, try the “reset” command.*
+
+### COMMANDS
+
+&gt; *ls     - list directory contents.*
+                                                                                                                        
+&gt; *cd     - change working directory.*
+                                                                                                                                                                           &gt;
+&gt; *cat    - concatenate files and print on the standard output.*
+                                                                                                                       
+&gt; *file   - determine file type.*
+                                                                                                                        
+&gt; *du     - estimate file space usage.*
+                                                                                                                        
+&gt; *find   - search for files in a directory hierarchy.*
+
+### SOLUTION
+
+View the files that are present in the current working directory using the `ls` command. Next move into the `inhere/` directory. This can be done using the `cd` command. 
+
+```bash
+bandit4@bandit:~$ ls
+inhere
+
+bandit4@bandit:~$ cd inhere/
+```
+View files that are in the directory using the `ls` command.
+
+```bash
+bandit4@bandit:~/inhere$ ls
+-file00  -file01  -file02  -file03  -file04  -file05  -file06  -file07  -file08  -file09
+```
+We know we have to find file who’s content is in Human Readable format. This check can be performed using the `file` command. File command returns the type of data that is found in the file. 
+
+```bash
+bandit4@bandit:~/inhere$ file ./*
+./-file00: data
+./-file01: data
+./-file02: data
+./-file03: data
+./-file04: data
+./-file05: data
+./-file06: data
+./-file07: ASCII text
+./-file08: data
+./-file09: data
+```
+View the content of `-file07` file using the `cat` command.
+
+```bash
+bandit4@bandit:~/inhere$ cat ./-file07
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+```
+We have found the password for the next level!
+
+## Level 5 to Level 6
+
+### THE LEVEL'S STATEMENT
+
+&gt;*The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:*
+&gt;
+&gt; *- human-readable*
+&gt; *- 1033 bytes in size*
+&gt; *- not executable*
+
+### COMMANDS
+
+&gt; *ls     - list directory contents.*
+                                                                                                                        
+&gt; *cd     - change working directory.*
+
+&gt; *cat    - concatenate files and print on the standard output.*
+
+&gt; *file   - determine file type.*
+                                                                                                                        
+&gt; *du     - estimate file space usage.*
+                                                                                                                        
+&gt; *find   - search for files in a directory hierarchy.*
+
+## SOLUTION
+
+View files that are in the `inhere` directory.
+
+```bash
+bandit5@bandit:~$ ls
+inhere
+bandit5@bandit:~$ cd inhere/
+bandit5@bandit:~/inhere$ ls
+maybehere00  maybehere03  maybehere06  maybehere09  maybehere12  maybehere15  maybehere18
+maybehere01  maybehere04  maybehere07  maybehere10  maybehere13  maybehere16  maybehere19
+maybehere02  maybehere05  maybehere08  maybehere11  maybehere14  maybehere17
+
+```
+
+To search for the file that we require using the properties that are specified in the question we can make use of the `find` command.
+
+```bash
+bandit5@bandit:~/inhere$ find . -type f -size 1033c -not -executable -exec file {} + | grep ASCII
+./maybehere07/.file2: ASCII text, with very long lines
+```
+&gt; ### Command Explanation
+&gt; - . : Search the current working directory only
+&gt; - -type f : Look for files only (Exclude Directories)
+&gt; - -size 1033c : Look for files that are exactly 1033 bytes in size (Find uses “c” to represent bytes)
+&gt; - -not -executable : Find only non executable files
+&gt; - -exec file {} + : Execute the file command on all the results returns by find
+&gt;
+&gt; **NOTE:** {} is an placeholder for the location where the names of the files found by find is going to be substituted. The “+” sign is used to terminate the statemen. 
+
+From the previous level we know that file command will return value “ASCII Text” for human readable files. So by using grep we are filtering the output to only show results with that contain that string. 
+The pipe (|) operator is used to pass the output of one command as the input of another command. 
+Finally we print the content of the file.
+
+```bash
+cat ./maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+```
+We have found the password for the next level!</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Nmap cheatsheet</title><link href="http://localhost:4000/nmap-commands/" rel="alternate" type="text/html" title="Nmap cheatsheet" /><published>2021-08-19T00:00:00+02:00</published><updated>2021-08-19T00:00:00+02:00</updated><id>http://localhost:4000/nmap-commands</id><content type="html" xml:base="http://localhost:4000/nmap-commands/">&lt;h2 id=&quot;scan-techniques&quot;&gt;Scan techniques&lt;/h2&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	-sS	nmap 192.168.1.1 -sS	 	TCP SYN port scan (Default)
 -sT 		nmap 192.168.1.1 -sT 		TCP connect port scan (Default without root privilege). 
 	-sU	nmap 192.168.1.1 -sU	 	UDP port scan

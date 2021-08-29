@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Bandit from level 3 to level 6
+title: Bandit from 3 to 6
 excerpt: "https://overthewire.org/wargames/bandit/"
 date: 2021-08-24
 classes: wide
@@ -18,20 +18,20 @@ tags: bandit
 
 ### THE LEVEL'S STATEMENT
 
->*The password for the next level is stored in a hidden file in the inhere directory.*
+>The password for the next level is stored in a hidden file in the inhere directory.
 
 ### COMMANDS
 
 > *ls     - list directory contents.*
-
+                                                                                                                        
 > *cd     - change working directory.*
-
+                                                                                                                                                                           >
 > *cat    - concatenate files and print on the standard output.*
-
+                                                                                                                       
 > *file   - determine file type.*
-
+                                                                                                                        
 > *du     - estimate file space usage.*
-
+                                                                                                                        
 > *find   - search for files in a directory hierarchy.*
 
 ### SOLUTION
@@ -70,7 +70,7 @@ We have found the password for the next level!
 ### COMMANDS
 
 > *ls     - list directory contents.*
-
+                                                                                                                        
 > *cd     - change working directory.*
                                                                                                                                                                            >
 > *cat    - concatenate files and print on the standard output.*
@@ -135,9 +135,9 @@ We have found the password for the next level!
 > *ls     - list directory contents.*
                                                                                                                         
 > *cd     - change working directory.*
-                                                                                                                                                                           >
+
 > *cat    - concatenate files and print on the standard output.*
-                                                                                                                       
+
 > *file   - determine file type.*
                                                                                                                         
 > *du     - estimate file space usage.*
