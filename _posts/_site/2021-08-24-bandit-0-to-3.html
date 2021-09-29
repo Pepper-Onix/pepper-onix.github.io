@@ -1,0 +1,141 @@
+<p><img src="../assets/images/overthewire.png" alt="" /></p>
+
+<h2 id="level-0-to-level-1">Level 0 to Level 1</h2>
+
+<h3 id="the-levels-statement">THE LEVEL’S STATEMENT</h3>
+<blockquote>
+  <p><em>The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</em></p>
+</blockquote>
+
+<h3 id="commands">COMMANDS</h3>
+
+<blockquote>
+  <p><em>ls     - list directory contents.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>cd     - change working directory.</em>
+                                                                                                                                                                           &gt;
+<em>cat    - concatenate files and print on the standard output.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>file   - determine file type.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>du     - estimate file space usage.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>find   - search for files in a directory hierarchy.</em></p>
+</blockquote>
+
+<h3 id="solution">SOLUTION</h3>
+
+<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command. (The “pwd” command can be used to view the current working directory).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>readme
+</code></pre></div></div>
+<p>We see there is a file named <code class="language-plaintext highlighter-rouge">readme</code> to view the contents of this file we can use the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">cat </span>readme 
+boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+</code></pre></div></div>
+<p>We have found the password for the next level !!</p>
+
+<h2 id="level-1-to-level-2">Level 1 to Level 2</h2>
+
+<h3 id="the-levels-statement-1">THE LEVEL’S STATEMENT</h3>
+
+<blockquote>
+  <p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">—</code> located in the home directory</em></p>
+</blockquote>
+
+<h3 id="commands-1">COMMANDS</h3>
+
+<blockquote>
+  <p><em>ls     - list directory contents.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>cd     - change working directory.</em>
+                                                                                                                                                                           &gt;
+<em>cat    - concatenate files and print on the standard output.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>file   - determine file type.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>du     - estimate file space usage.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>find   - search for files in a directory hierarchy.</em></p>
+</blockquote>
+
+<h3 id="solution-1">SOLUTION</h3>
+
+<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit1@bandit:~<span class="nv">$ </span><span class="nb">ls</span>
+-
+</code></pre></div></div>
+<p>We can view the content of file named <code class="language-plaintext highlighter-rouge">-</code> using the <code class="language-plaintext highlighter-rouge">cat</code> command. <strong>NOTE:</strong> <code class="language-plaintext highlighter-rouge">-</code> in Linux refers to Standard Input/ Standard Output (STDIN/ STDOUT). So We have to use the concept of redirection or specify the absolute path to the file to access it.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit1@bandit:~<span class="nv">$ </span><span class="nb">cat</span> &lt; -
+CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+bandit1@bandit:~<span class="nv">$ </span><span class="nb">cat</span> ./-
+CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+</code></pre></div></div>
+<p>We have found the password for the next level !</p>
+
+<h2 id="level-2-to-level-3">Level 2 to Level 3</h2>
+
+<h2 id="the-levels-statement-2">The Level’s statement</h2>
+
+<blockquote>
+  <p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">spaces in this filename</code> located in the home directory.</em></p>
+</blockquote>
+
+<h3 id="commands-2">COMMANDS</h3>
+
+<blockquote>
+  <p><em>ls     - list directory contents.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>cd     - change working directory.</em>
+                                                                                                                                                                           &gt;
+<em>cat    - concatenate files and print on the standard output.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>file   - determine file type.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>du     - estimate file space usage.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>find   - search for files in a directory hierarchy.</em></p>
+</blockquote>
+
+<h2 id="solution-2">SOLUTION</h2>
+
+<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit2@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>spaces <span class="k">in </span>this filename
+</code></pre></div></div>
+<p>View the content of the file named spaces in this filename using the cat command. <strong>NOTE:</strong> The spaces in the name can be escaped using \ , another approach is to enclosing the filename in “” (quotes).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit2@bandit:~<span class="nv">$ </span><span class="nb">cat </span>spaces<span class="se">\ </span><span class="k">in</span><span class="se">\ </span>this<span class="se">\ </span>filename
+UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+bandit2@bandit:~<span class="nv">$ </span><span class="nb">cat</span> <span class="s2">"spaces in this filename"</span>
+UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+</code></pre></div></div>
+<p>We have found the password for the next level !</p>

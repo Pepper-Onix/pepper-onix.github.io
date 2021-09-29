@@ -1,0 +1,4 @@
+<h2 id="exclude-a-file-from-deletion">Exclude a file from deletion</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="nt">-rf</span> <span class="si">$(</span>find <span class="nb">.</span> <span class="nt">-name</span> <span class="s2">"*"</span> <span class="o">!</span> <span class="nt">-name</span> <span class="s2">"important.txt"</span><span class="si">)</span>
+</code></pre></div></div>
