@@ -21,5 +21,5 @@ git add *
 
 git commit -m "Info about the update"
 
-git push -u origin master 
+git push 
 ```
