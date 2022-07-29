@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Bandit (0 to 3) - PepperOnion’s Blog</title>
+<!-- begin _includes/seo.html --><title>Bandit (9 to 12) - PepperOnion’s Blog</title>
 <meta name="description" content="https://overthewire.org/wargames/bandit/">
 
 
@@ -17,21 +17,21 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="PepperOnion's Blog">
-<meta property="og:title" content="Bandit (0 to 3)">
-<meta property="og:url" content="http://localhost:4000/bandit-0-to-3/">
+<meta property="og:title" content="Bandit (9 to 12)">
+<meta property="og:url" content="http://localhost:4000/bandit-9-to-12/">
 
 
   <meta property="og:description" content="https://overthewire.org/wargames/bandit/">
 
 
 
-  <meta property="og:image" content="http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png">
+  <meta property="og:image" content="http://localhost:4000/assets/images/">
 
 
 
 
 
-  <meta property="article:published_time" content="2021-08-24T00:00:00+02:00">
+  <meta property="article:published_time" content="2022-07-15T00:00:00+02:00">
 
 
 
@@ -42,7 +42,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/bandit-0-to-3/">
+<link rel="canonical" href="http://localhost:4000/bandit-9-to-12/">
 
 
 
@@ -166,7 +166,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Bandit (0 to 3)</li>
+        <li class="current">Bandit (9 to 12)</li>
       
     
   </ol>
@@ -294,15 +294,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Bandit (0 to 3)">
+    <meta itemprop="headline" content="Bandit (9 to 12)">
     <meta itemprop="description" content="https://overthewire.org/wargames/bandit/">
-    <meta itemprop="datePublished" content="August 24, 2021">
+    <meta itemprop="datePublished" content="July 15, 2022">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Bandit (0 to 3)
+          <h1 id="page-title" class="page__title" itemprop="headline">Bandit (9 to 12)
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -320,7 +320,7 @@
         
         <p class="page__meta">
           
-            <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-08-24T00:00:00+02:00">August 24, 2021 </time>&emsp;
+            <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2022-07-15T00:00:00+02:00">July 15, 2022 </time>&emsp;
           
           <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;
 
@@ -332,145 +332,152 @@
         </p>
         <p><img src="../assets/images/overthewire.png" alt="" /></p>
 
-<h2 id="level-0-to-level-1">Level 0 to Level 1</h2>
+<h2 id="level-9-to-level-10">Level 9 to Level 10</h2>
 
 <h3 id="the-levels-statement">THE LEVEL’S STATEMENT</h3>
+
 <blockquote>
-  <p><em>The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</em></p>
+  <p><em>The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.</em></p>
 </blockquote>
 
 <h3 id="commands-you-may-need">COMMANDS YOU MAY NEED</h3>
 
 <blockquote>
-  <p><em>ls     - list directory contents.</em></p>
+  <p><em>grep   - print lines that match patterns</em></p>
 </blockquote>
 
 <blockquote>
-  <p><em>cd     - change working directory.</em>
-                                                                                                                                                                           &gt;
-<em>cat    - concatenate files and print on the standard output.</em></p>
+  <p><em>sort   - sort lines of text files</em></p>
 </blockquote>
 
 <blockquote>
-  <p><em>file   - determine file type.</em></p>
+  <p><em>uniq   - report or omit repeated lines</em></p>
 </blockquote>
 
 <blockquote>
-  <p><em>du     - estimate file space usage.</em></p>
+  <p><em>strings- print the sequence of printable characters in files</em></p>
 </blockquote>
 
 <blockquote>
-  <p><em>find   - search for files in a directory hierarchy.</em></p>
+  <p><em>base64 - print the sequence of printable characters in files</em></p>
 </blockquote>
 
-<h3 id="solution">SOLUTION</h3>
+<blockquote>
+  <p><em>tr     - translate or delete characters</em></p>
+</blockquote>
 
-<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command. (The “pwd” command can be used to view the current working directory).</p>
+<blockquote>
+  <p><em>tar    - an archiving utility</em></p>
+</blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">ls
-</span>readme
+<blockquote>
+  <p><em>gzip   - compress or expand files</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>bzip2  - a block-sorting file compressor</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>xxd    - make a hexdump or do the reverse</em></p>
+  <h3 id="solution">SOLUTION</h3>
+</blockquote>
+
+<p>View the contents of the current working directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit3@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>data.txt
 </code></pre></div></div>
-<p>We see there is a file named <code class="language-plaintext highlighter-rouge">readme</code> to view the contents of this file we can use the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
+<p>Check out the data that is present in the file. This can be achieved using <code class="language-plaintext highlighter-rouge">head</code> command.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">cat </span>readme 
-boJ9jbbUNNfktd78OOpsqOltutMc3MY1
-</code></pre></div></div>
-<p>We have found the password for the next level !!</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit9@bandit:~<span class="nv">$ </span><span class="nb">head</span> <span class="nt">-n</span> 4 data.txt
+�L�lω<span class="p">;</span>��ßOܛ��ǤX��NdT<span class="nv">$�</span>�x7��@D@�o��+D��B��M֢�Z/,_��w��#�5���
+                                                              Ў�e�&amp;�-��Ϣ�6Q8��J�%fa�
+�np�6l
+|c���WW<span class="s2">"&amp;8��f��
+��VJ�</span><span class="nv">$�</span><span class="s2">S~����d�
+                 �p�k�U�;ֿ�v�Am��H��tɘ�3�ߘ�(ǟ�E'
+                                                     ���'��:��uP�ע���������g� 
+</span></code></pre></div></div>
+<p>Human readable string in a file can be found using the <code class="language-plaintext highlighter-rouge">strings</code> command.
+The <code class="language-plaintext highlighter-rouge">-e</code> flag is used to specify the character encoding. We are assuming the human readable line is ASCII so we use “s” for the encoding type.</p>
 
-<h2 id="level-1-to-level-2">Level 1 to Level 2</h2>
+<p>We also know that the line with the password starts with a few “=” characters. We can look for this pattern in the file using the <code class="language-plaintext highlighter-rouge">grep</code> command. We can combine all these commands into a single line using the pipe operator.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit9@bandit:~<span class="nv">$ </span><span class="nb">cat </span>data.txt | strings <span class="nt">-e</span> s | <span class="nb">grep</span> <span class="o">==</span>
+<span class="o">==========</span> the<span class="k">*</span>2i<span class="s2">"4
+========== password
+Z)========== is
+&amp;========== truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+</span></code></pre></div></div>
+
+<p>We have found the password for the next level!</p>
+
+<h2 id="level-10-to-level-11">Level 10 to Level 11</h2>
 
 <h3 id="the-levels-statement-1">THE LEVEL’S STATEMENT</h3>
 
 <blockquote>
-  <p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">—</code> located in the home directory</em></p>
+  <p>The password for the next level is stored in the file data.txt, which contains base64 encoded data.</p>
 </blockquote>
 
 <h3 id="commands-you-may-need-1">COMMANDS YOU MAY NEED</h3>
 
 <blockquote>
-  <p><em>ls     - list directory contents.</em></p>
-</blockquote>
-
-<blockquote>
-  <p><em>cd     - change working directory.</em>
-                                                                                                                                                                           &gt;
-<em>cat    - concatenate files and print on the standard output.</em></p>
-</blockquote>
-
-<blockquote>
-  <p><em>file   - determine file type.</em></p>
-</blockquote>
-
-<blockquote>
-  <p><em>du     - estimate file space usage.</em></p>
-</blockquote>
-
-<blockquote>
-  <p><em>find   - search for files in a directory hierarchy.</em></p>
+  <p>Same commands as level 10.</p>
 </blockquote>
 
 <h3 id="solution-1">SOLUTION</h3>
 
-<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+<p>View the contents of the current working directory.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit1@bandit:~<span class="nv">$ </span><span class="nb">ls</span>
--
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit10@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>data.txt
 </code></pre></div></div>
-<p>We can view the content of file named <code class="language-plaintext highlighter-rouge">-</code> using the <code class="language-plaintext highlighter-rouge">cat</code> command. <strong>NOTE:</strong> <code class="language-plaintext highlighter-rouge">-</code> in Linux refers to Standard Input/ Standard Output (STDIN/ STDOUT). So We have to use the concept of redirection or specify the absolute path to the file to access it.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit1@bandit:~<span class="nv">$ </span><span class="nb">cat</span> &lt; -
-CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
-bandit1@bandit:~<span class="nv">$ </span><span class="nb">cat</span> ./-
-CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+<p>Check out the data that is in the file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit10@bandit:~<span class="nv">$ </span><span class="nb">cat </span>data.txt
+<span class="nv">VGhlIHBhc3N3b3JkIGlzIElGdWt3S0dzRlc4TU9xM0lSRnFyeEUxaHhUTkViVVBSCg</span><span class="o">==</span>
 </code></pre></div></div>
-<p>We have found the password for the next level !</p>
+<p>Looking at the content it looks like an string of random characters but from the question we know that the data is base64 encoded. We can decode this data using the base64 command that is present on unix systems. The <code class="language-plaintext highlighter-rouge">-d</code> flag is used to decode the data.</p>
 
-<h2 id="level-2-to-level-3">Level 2 to Level 3</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit10@bandit:~<span class="nv">$ </span><span class="nb">cat </span>data.txt | <span class="nb">base64</span> <span class="nt">-d</span>
+The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+</code></pre></div></div>
+<p>We have found the password for the next level!</p>
 
-<h2 id="the-levels-statement-2">The Level’s statement</h2>
+<h2 id="level-11-to-level-12">Level 11 to Level 12</h2>
+
+<h3 id="the-levels-statement-2">THE LEVEL’S STATEMENT</h3>
 
 <blockquote>
-  <p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">spaces in this filename</code> located in the home directory.</em></p>
+  <p><em>The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.</em></p>
 </blockquote>
 
 <h3 id="commands-you-may-need-2">COMMANDS YOU MAY NEED</h3>
 
 <blockquote>
-  <p><em>ls     - list directory contents.</em></p>
-</blockquote>
-
-<blockquote>
-  <p><em>cd     - change working directory.</em>
-                                                                                                                                                                           &gt;
-<em>cat    - concatenate files and print on the standard output.</em></p>
-</blockquote>
-
-<blockquote>
-  <p><em>file   - determine file type.</em></p>
-</blockquote>
-
-<blockquote>
-  <p><em>du     - estimate file space usage.</em></p>
-</blockquote>
-
-<blockquote>
-  <p><em>find   - search for files in a directory hierarchy.</em></p>
+  <p><em>Same commands as level 10.</em></p>
 </blockquote>
 
 <h2 id="solution-2">SOLUTION</h2>
 
-<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+<p>View the contents of the current working directory.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit2@bandit:~<span class="nv">$ </span><span class="nb">ls
-</span>spaces <span class="k">in </span>this filename
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit11@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>data.txt
 </code></pre></div></div>
-<p>View the content of the file named spaces in this filename using the cat command. <strong>NOTE:</strong> The spaces in the name can be escaped using \ , another approach is to enclosing the filename in “” (quotes).</p>
+<p>Check out the data that is present in the file.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit2@bandit:~<span class="nv">$ </span><span class="nb">cat </span>spaces<span class="se">\ </span><span class="k">in</span><span class="se">\ </span>this<span class="se">\ </span>filename
-UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
-bandit2@bandit:~<span class="nv">$ </span><span class="nb">cat</span> <span class="s2">"spaces in this filename"</span>
-UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit11@bandit:~<span class="nv">$ </span><span class="nb">cat </span>data.txt
+Gur cnffjbeq vf 5Gr8L4qetPEsPk8htqjhRK8XSP6x2RHh
 </code></pre></div></div>
-<p>We have found the password for the next level !</p>
+<p>We know that the characters in the data are rotated by 13 characters. We can get the characters to its original order using the tr command. The tr command is used to translate/ transform data from one form to another.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit11@bandit:~<span class="nv">$ </span><span class="nb">cat </span>data.txt | <span class="nb">tr</span> <span class="s1">'A-Za-z'</span> <span class="s1">'N-ZA-Mn-za-m'</span>
+The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+</code></pre></div></div>
+<p>We have found the password for the next level!</p>
 
         
       </section>
@@ -531,7 +538,7 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-08-24T00:00:00+02:00">August 24, 2021</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-07-15T00:00:00+02:00">July 15, 2022</time></p>
         
       </footer>
 
@@ -540,11 +547,11 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
       
   <nav class="pagination">
     
-      <a href="/nmap-commands/" class="pagination--pager" title="Nmap cheatsheet
+      <a href="/bandit-6-to-9/" class="pagination--pager" title="Bandit (6 to 9)
 ">Previous</a>
     
     
-      <a href="/bandit-3-to-6/" class="pagination--pager" title="Bandit (3 to 6)
+      <a href="/bandit-18-to-21/" class="pagination--pager" title="Bandit (18 to 21)
 ">Next</a>
     
   </nav>

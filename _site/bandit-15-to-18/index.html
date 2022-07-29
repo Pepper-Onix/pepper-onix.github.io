@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Bandit (0 to 3) - PepperOnion’s Blog</title>
+<!-- begin _includes/seo.html --><title>Bandit (15 to 18) - PepperOnion’s Blog</title>
 <meta name="description" content="https://overthewire.org/wargames/bandit/">
 
 
@@ -17,21 +17,21 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="PepperOnion's Blog">
-<meta property="og:title" content="Bandit (0 to 3)">
-<meta property="og:url" content="http://localhost:4000/bandit-0-to-3/">
+<meta property="og:title" content="Bandit (15 to 18)">
+<meta property="og:url" content="http://localhost:4000/bandit-15-to-18/">
 
 
   <meta property="og:description" content="https://overthewire.org/wargames/bandit/">
 
 
 
-  <meta property="og:image" content="http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png">
+  <meta property="og:image" content="http://localhost:4000/assets/images/">
 
 
 
 
 
-  <meta property="article:published_time" content="2021-08-24T00:00:00+02:00">
+  <meta property="article:published_time" content="2022-07-16T00:00:00+02:00">
 
 
 
@@ -42,7 +42,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/bandit-0-to-3/">
+<link rel="canonical" href="http://localhost:4000/bandit-15-to-18/">
 
 
 
@@ -166,7 +166,7 @@
         <span class="sep">/</span>
       
       
-        <li class="current">Bandit (0 to 3)</li>
+        <li class="current">Bandit (15 to 18)</li>
       
     
   </ol>
@@ -294,15 +294,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Bandit (0 to 3)">
+    <meta itemprop="headline" content="Bandit (15 to 18)">
     <meta itemprop="description" content="https://overthewire.org/wargames/bandit/">
-    <meta itemprop="datePublished" content="August 24, 2021">
+    <meta itemprop="datePublished" content="July 16, 2022">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Bandit (0 to 3)
+          <h1 id="page-title" class="page__title" itemprop="headline">Bandit (15 to 18)
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -310,7 +310,7 @@
 
 
 
-  2 minute read
+  3 minute read
 </p>
           
         </header>
@@ -320,35 +320,38 @@
         
         <p class="page__meta">
           
-            <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2021-08-24T00:00:00+02:00">August 24, 2021 </time>&emsp;
+            <i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="2022-07-16T00:00:00+02:00">July 16, 2022 </time>&emsp;
           
           <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;
 
 
 
 
-  2 minute read
+  3 minute read
 
         </p>
         <p><img src="../assets/images/overthewire.png" alt="" /></p>
 
-<h2 id="level-0-to-level-1">Level 0 to Level 1</h2>
+<h2 id="level-15-to-level-16">Level 15 to Level 16</h2>
 
 <h3 id="the-levels-statement">THE LEVEL’S STATEMENT</h3>
+
 <blockquote>
-  <p><em>The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</em></p>
+  <p>**</p>
 </blockquote>
 
-<h3 id="commands-you-may-need">COMMANDS YOU MAY NEED</h3>
+<h3 id="commands">COMMANDS</h3>
 
 <blockquote>
   <p><em>ls     - list directory contents.</em></p>
 </blockquote>
 
 <blockquote>
-  <p><em>cd     - change working directory.</em>
-                                                                                                                                                                           &gt;
-<em>cat    - concatenate files and print on the standard output.</em></p>
+  <p><em>cd     - change working directory.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><em>cat    - concatenate files and print on the standard output.</em></p>
 </blockquote>
 
 <blockquote>
@@ -365,27 +368,36 @@
 
 <h3 id="solution">SOLUTION</h3>
 
-<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command. (The “pwd” command can be used to view the current working directory).</p>
+<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">ls
-</span>readme
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit3@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>inhere
 </code></pre></div></div>
-<p>We see there is a file named <code class="language-plaintext highlighter-rouge">readme</code> to view the contents of this file we can use the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
+<p>Move into the <code class="language-plaintext highlighter-rouge">inhere/</code> directory. This can be done using the <code class="language-plaintext highlighter-rouge">cd</code> command</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit0@bandit:~<span class="nv">$ </span><span class="nb">cat </span>readme 
-boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit3@bandit:~<span class="nv">$ </span><span class="nb">cd </span>inhere/
 </code></pre></div></div>
-<p>We have found the password for the next level !!</p>
+<p>View files that are in the directory using the <code class="language-plaintext highlighter-rouge">ls</code> command. Since we know the file is hidden we have to use the <code class="language-plaintext highlighter-rouge">-a</code> flag to view hidden files.</p>
 
-<h2 id="level-1-to-level-2">Level 1 to Level 2</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit3@bandit:~/inhere<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-a</span>
+<span class="nb">.</span>
+..
+.hidden
+</code></pre></div></div>
+<p>View the content of <code class="language-plaintext highlighter-rouge">.hidden</code> file using the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
+
+<p>We have found the password for the next level!</p>
+
+<h2 id="level-16-to-level-17">Level 16 to Level 17</h2>
 
 <h3 id="the-levels-statement-1">THE LEVEL’S STATEMENT</h3>
 
 <blockquote>
-  <p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">—</code> located in the home directory</em></p>
+  <p>**
+**</p>
 </blockquote>
 
-<h3 id="commands-you-may-need-1">COMMANDS YOU MAY NEED</h3>
+<h3 id="commands-1">COMMANDS</h3>
 
 <blockquote>
   <p><em>ls     - list directory contents.</em></p>
@@ -411,28 +423,48 @@ boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 
 <h3 id="solution-1">SOLUTION</h3>
 
-<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command. Next move into the <code class="language-plaintext highlighter-rouge">inhere/</code> directory. This can be done using the <code class="language-plaintext highlighter-rouge">cd</code> command.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit1@bandit:~<span class="nv">$ </span><span class="nb">ls</span>
--
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit4@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>inhere
+
+bandit4@bandit:~<span class="nv">$ </span><span class="nb">cd </span>inhere/
 </code></pre></div></div>
-<p>We can view the content of file named <code class="language-plaintext highlighter-rouge">-</code> using the <code class="language-plaintext highlighter-rouge">cat</code> command. <strong>NOTE:</strong> <code class="language-plaintext highlighter-rouge">-</code> in Linux refers to Standard Input/ Standard Output (STDIN/ STDOUT). So We have to use the concept of redirection or specify the absolute path to the file to access it.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit1@bandit:~<span class="nv">$ </span><span class="nb">cat</span> &lt; -
-CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
-bandit1@bandit:~<span class="nv">$ </span><span class="nb">cat</span> ./-
-CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+<p>View files that are in the directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit4@bandit:~/inhere<span class="nv">$ </span><span class="nb">ls</span>
+<span class="nt">-file00</span>  <span class="nt">-file01</span>  <span class="nt">-file02</span>  <span class="nt">-file03</span>  <span class="nt">-file04</span>  <span class="nt">-file05</span>  <span class="nt">-file06</span>  <span class="nt">-file07</span>  <span class="nt">-file08</span>  <span class="nt">-file09</span>
 </code></pre></div></div>
-<p>We have found the password for the next level !</p>
+<p>We know we have to find file who’s content is in Human Readable format. This check can be performed using the <code class="language-plaintext highlighter-rouge">file</code> command. File command returns the type of data that is found in the file.</p>
 
-<h2 id="level-2-to-level-3">Level 2 to Level 3</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit4@bandit:~/inhere<span class="nv">$ </span>file ./<span class="k">*</span>
+./-file00: data
+./-file01: data
+./-file02: data
+./-file03: data
+./-file04: data
+./-file05: data
+./-file06: data
+./-file07: ASCII text
+./-file08: data
+./-file09: data
+</code></pre></div></div>
+<p>View the content of <code class="language-plaintext highlighter-rouge">-file07</code> file using the <code class="language-plaintext highlighter-rouge">cat</code> command.</p>
 
-<h2 id="the-levels-statement-2">The Level’s statement</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit4@bandit:~/inhere<span class="nv">$ </span><span class="nb">cat</span> ./-file07
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+</code></pre></div></div>
+<p>We have found the password for the next level!</p>
+
+<h2 id="level-17-to-level-18">Level 17 to Level 18</h2>
+
+<h3 id="the-levels-statement-2">THE LEVEL’S STATEMENT</h3>
 
 <blockquote>
-  <p><em>The password for the next level is stored in a file called <code class="language-plaintext highlighter-rouge">spaces in this filename</code> located in the home directory.</em></p>
+  <p>**</p>
 </blockquote>
 
-<h3 id="commands-you-may-need-2">COMMANDS YOU MAY NEED</h3>
+<h3 id="commands-2">COMMANDS</h3>
 
 <blockquote>
   <p><em>ls     - list directory contents.</em></p>
@@ -458,19 +490,44 @@ CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 
 <h2 id="solution-2">SOLUTION</h2>
 
-<p>View the files that are present in the current working directory using the <code class="language-plaintext highlighter-rouge">ls</code> command.</p>
+<p>View files that are in the <code class="language-plaintext highlighter-rouge">inhere</code> directory.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit2@bandit:~<span class="nv">$ </span><span class="nb">ls
-</span>spaces <span class="k">in </span>this filename
-</code></pre></div></div>
-<p>View the content of the file named spaces in this filename using the cat command. <strong>NOTE:</strong> The spaces in the name can be escaped using \ , another approach is to enclosing the filename in “” (quotes).</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit5@bandit:~<span class="nv">$ </span><span class="nb">ls
+</span>inhere
+bandit5@bandit:~<span class="nv">$ </span><span class="nb">cd </span>inhere/
+bandit5@bandit:~/inhere<span class="nv">$ </span><span class="nb">ls
+</span>maybehere00  maybehere03  maybehere06  maybehere09  maybehere12  maybehere15  maybehere18
+maybehere01  maybehere04  maybehere07  maybehere10  maybehere13  maybehere16  maybehere19
+maybehere02  maybehere05  maybehere08  maybehere11  maybehere14  maybehere17
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit2@bandit:~<span class="nv">$ </span><span class="nb">cat </span>spaces<span class="se">\ </span><span class="k">in</span><span class="se">\ </span>this<span class="se">\ </span>filename
-UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
-bandit2@bandit:~<span class="nv">$ </span><span class="nb">cat</span> <span class="s2">"spaces in this filename"</span>
-UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 </code></pre></div></div>
-<p>We have found the password for the next level !</p>
+
+<p>To search for the file that we require using the properties that are specified in the question we can make use of the <code class="language-plaintext highlighter-rouge">find</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bandit5@bandit:~/inhere<span class="nv">$ </span>find <span class="nb">.</span> <span class="nt">-type</span> f <span class="nt">-size</span> 1033c <span class="nt">-not</span> <span class="nt">-executable</span> <span class="nt">-exec</span> file <span class="o">{}</span> + | <span class="nb">grep </span>ASCII
+./maybehere07/.file2: ASCII text, with very long lines
+</code></pre></div></div>
+<blockquote>
+  <h3 id="command-explanation">Command Explanation</h3>
+  <ul>
+    <li>. : Search the current working directory only</li>
+    <li>-type f : Look for files only (Exclude Directories)</li>
+    <li>-size 1033c : Look for files that are exactly 1033 bytes in size (Find uses “c” to represent bytes)</li>
+    <li>-not -executable : Find only non executable files</li>
+    <li>-exec file {} + : Execute the file command on all the results returns by find</li>
+  </ul>
+
+  <p><strong>NOTE:</strong> {} is an placeholder for the location where the names of the files found by find is going to be substituted. The “+” sign is used to terminate the statemen.</p>
+</blockquote>
+
+<p>From the previous level we know that file command will return value “ASCII Text” for human readable files. So by using grep we are filtering the output to only show results with that contain that string. 
+The pipe (|) operator is used to pass the output of one command as the input of another command. 
+Finally we print the content of the file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ./maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+</code></pre></div></div>
+<p>We have found the password for the next level!</p>
 
         
       </section>
@@ -531,7 +588,7 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-08-24T00:00:00+02:00">August 24, 2021</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-07-16T00:00:00+02:00">July 16, 2022</time></p>
         
       </footer>
 
@@ -540,12 +597,11 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
       
   <nav class="pagination">
     
-      <a href="/nmap-commands/" class="pagination--pager" title="Nmap cheatsheet
+      <a href="/bandit-12-to-15/" class="pagination--pager" title="Bandit (12 to 15)
 ">Previous</a>
     
     
-      <a href="/bandit-3-to-6/" class="pagination--pager" title="Bandit (3 to 6)
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 

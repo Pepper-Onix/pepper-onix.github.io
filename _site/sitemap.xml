@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/htb-writeup-ready/</loc>
-<lastmod>2021-05-15T00:00:00+02:00</lastmod>
-</url>
-<url>
 <loc>http://localhost:4000/htb-writeup-delivery/</loc>
 <lastmod>2021-05-22T00:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/useful-git-commands/</loc>
+<lastmod>2021-07-15T00:00:00+02:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/useful-bash-commands/</loc>
@@ -29,6 +29,22 @@
 <lastmod>2021-08-29T00:00:00+02:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/bandit-9-to-12/</loc>
+<lastmod>2022-07-15T00:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/bandit-18-to-21/</loc>
+<lastmod>2022-07-15T00:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/bandit-12-to-15/</loc>
+<lastmod>2022-07-16T00:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/bandit-15-to-18/</loc>
+<lastmod>2022-07-16T00:00:00+02:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/404/</loc>
 </url>
 <url>
@@ -45,5 +61,8 @@
 </url>
 <url>
 <loc>http://localhost:4000/year-archive/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/page2/</loc>
 </url>
 </urlset>

