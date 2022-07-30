@@ -5,7 +5,7 @@ var store = [{
         "url": "http://localhost:4000/htb-writeup-delivery/",
         "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"},{
         "title": "Useful git comands",
-        "excerpt":"Update github repository   git add *  git commit -m \"Info about the update\"  git push   ","categories": [],
+        "excerpt":"Update github repository remotly   git add *  git commit -m \"Info about the update\"  git push   ","categories": [],
         "tags": ["git"],
         "url": "http://localhost:4000/useful-git-commands/",
         "teaser":"http://localhost:4000/assets/images/htb-writeup-delivery/delivery_logo.png"},{

@@ -14,7 +14,7 @@ tags: git
 
 ---
 
-## Update github repository
+## Update github repository remotly
 
 ```bash
 git add *
